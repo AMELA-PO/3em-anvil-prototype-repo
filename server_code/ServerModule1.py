@@ -14,6 +14,10 @@ class Stroom(pydantic.BaseModel):
   Gas: Optional[float]
   Stroomleverancier: str
 
+@anvil.server.callable
+def getData(file):
+  Userdata = file
+
 # This is a server module. It runs on the Anvil server,
 # rather than in the user's browser.
 #
