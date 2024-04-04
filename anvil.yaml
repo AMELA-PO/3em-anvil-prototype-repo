@@ -1,8 +1,33 @@
-allow_embedding: false
-package_name: M3_App_1
-name: M3 App 1
-startup_form: Form1
-renamed: true
-runtime_options: {version: 2, client_version: '3', server_version: python3-full, server_spec: null}
 dependencies: []
-services: []
+services:
+- source: /runtime/services/tables.yml
+  client_config: {}
+  server_config: {}
+- source: /runtime/services/anvil/files.yml
+  client_config: {}
+  server_config: {file_table: files}
+package_name: Pydantic_test
+allow_embedding: false
+name: Pydantic test
+runtime_options:
+  version: 2
+  client_version: '3'
+  server_version: python3-full
+  server_spec: {base: python310-minimal}
+startup_form: Form1
+db_schema:
+  files:
+    client: none
+    server: full
+    columns:
+    - name: path
+      admin_ui: {order: 0, width: 200}
+      type: string
+    - name: file
+      admin_ui: {order: 1, width: 200}
+      type: media
+    - name: file_version
+      admin_ui: {order: 2, width: 200}
+      type: string
+    title: Files
+renamed: true
