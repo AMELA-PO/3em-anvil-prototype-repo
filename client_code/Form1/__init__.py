@@ -21,6 +21,7 @@ class Form1(Form1Template):
     else:
       print("no file selected")
       self.Uploadlabel.foreground = 'theme:Error'
+      self.Uploadlabel.bold = True
     pass
   #This method is called when a new file is loaded into this FileLoader
   def file_loader_1_change(self, file, **event_args):
