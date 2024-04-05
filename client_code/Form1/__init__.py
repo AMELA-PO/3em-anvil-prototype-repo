@@ -17,7 +17,8 @@ class Form1(Form1Template):
     print("the button was clicked")
     if self.file_loader_1.file != None: #Check if the button has a file in it
       print(self.file_loader_1.file.name) #Display file name
-      anvil.server.call('getData', self.file_loader_1.file)
+      #anvil.server.call('getData', self.file_loader_1.file)
+      anvil.server.call('emit_server_ip')
     else:
       print("no file selected")
       self.Uploadlabel.foreground = 'theme:Error'
