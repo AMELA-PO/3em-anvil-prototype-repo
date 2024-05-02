@@ -17,12 +17,23 @@ class Form1(Form1Template):
     print("the button was clicked")
     if self.file_loader_1.file != None: #Check if the button has a file in it
       print(self.file_loader_1.file.name) #Display file name
+      result = alert(content="Wilt u doorgaan naar de visualisatie of meer data uploaden?",
+               title="Data succesvol geupload!",
+               large=True,
+               buttons=[
+                 ("Ga door", "Load_Visualisatie"),
+                 ("Upload meer", "Load_prod_data_knop"),
+                 ("Neither", "Doe niks")
+               ])
+
+      print(f"The user chose {result}")
       #anvil.server.call('getData', self.file_loader_1.file)
       anvil.server.call('emit_server_ip', self.file_loader_1.file)
     else:
       print("no file selected")
       self.Uploadlabel.foreground = 'theme:Error'
       self.Uploadlabel.bold = True
+    
     pass
   #This method is called when a new file is loaded into this FileLoader
   def file_loader_1_change(self, file, **event_args):

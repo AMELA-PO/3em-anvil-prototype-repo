@@ -24,6 +24,10 @@ components:
     layout_properties: {grid_position: 'FNLJUV,ABOGJL'}
     event_bindings: {click: button_1_click}
     data_bindings: []
+  - name: spacer_1
+    properties: {height: 32}
+    type: Spacer
+    layout_properties: {grid_position: 'ORBVFH,MHNDJD'}
 - type: FlowPanel
   properties: {}
   name: navbar_links
