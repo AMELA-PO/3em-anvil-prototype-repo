@@ -5,7 +5,7 @@ container:
 components:
 - type: ColumnPanel
   properties: {col_widths: '{}'}
-  name: ContentPanel
+  name: DataContentPanel
   layout_properties: {slot: default}
   components:
   - name: ProdDataToggle
