@@ -44,15 +44,22 @@ components:
       properties: {text: '* .csv of .xlsx bestanden.', bold: false}
       type: Label
       layout_properties: {grid_position: 'FNLJUV,UQFYCJ'}
+  - name: ClearData
+    properties: {text: Clear Data, background: 'theme:Primary', foreground: 'theme:On
+        Primary', icon_align: left, align: right, bold: false, tooltip: Upload your csv document here.}
+    type: Button
+    layout_properties: {grid_position: 'ORBVFH,UWLJMD'}
+    event_bindings: {click: ClearData_click}
+    data_bindings: []
   - name: spacer_1
     properties: {height: 32}
     type: Spacer
     layout_properties: {grid_position: 'ORBVFH,MHNDJD'}
-  - name: UploadData
+  - name: UploadData_copy
     properties: {text: Upload, background: 'theme:Primary', foreground: 'theme:On
         Primary', icon_align: left, align: left, bold: false, tooltip: Upload your csv document here.}
     type: Button
-    layout_properties: {grid_position: 'ORBVFH,OEPEKE'}
+    layout_properties: {grid_position: 'ORBVFH,HVEMJZ'}
     event_bindings: {click: UploadData_Click}
     data_bindings: []
 - type: FlowPanel
