@@ -1,5 +1,7 @@
 from ._anvil_designer import Form1Template
 from anvil import *
+import plotly.graph_objects as go
+import pandas as pd
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
@@ -11,6 +13,34 @@ class Form1(Form1Template):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     # Any code you write here will run before the form opens.
+
+    # Voorbeeld DataFrame
+    df = pd.DataFrame({
+        'Tijd': ['2024-01-01', '2024-01-02', '2024-01-03'],
+        'Elektriciteit': [100, 150, 130],
+        'Gas': [80, 90, 85],
+        'Productie': [200, 210, 205]
+    })
+    
+    # Creëren van de grafiek
+    fig = go.Figure()
+    
+    # Toevoegen van de elektriciteitslijn
+    fig.add_trace(go.Scatter(x=df['Tijd'], y=df['Elektriciteit'], mode='lines', name='Elektriciteit'))
+    
+    # Toevoegen van de gaslijn
+    fig.add_trace(go.Scatter(x=df['Tijd'], y=df['Gas'], mode='lines', name='Gas'))
+    
+    # Toevoegen van de productielijn
+    fig.add_trace(go.Scatter(x=df['Tijd'], y=df['Productie'], mode='lines', name='Productie'))
+    
+    # Update layout
+    fig.update_layout(title='Elektriciteit, Gas en Productie Over Tijd',
+                      xaxis_title='Tijd',
+                      yaxis_title='Waarde')
+    
+    # Toon de grafiek in Anvil met Plot component
+    self.plot_1.figure = fig
 
   #This method is called when the button is clicked
   def UploadData_Click(self, **event_args):
