@@ -13,31 +13,60 @@ class Form1(Form1Template):
     # Any code you write here will run before the form opens.
 
   #This method is called when the button is clicked
-  def button_1_click(self, **event_args):
-    print("the button was clicked")
-    if self.file_loader_1.file != None: #Check if the button has a file in it
-      print(self.file_loader_1.file.name) #Display file name
-      result = alert(content="Wilt u doorgaan naar de visualisatie of meer data uploaden?",
+  def UploadData_Click(self, **event_args):
+    if self.ProdDataToggle.checked and self.Consumption_FileLoader.file and self.Production_FileLoader.file:
+      # Code to execute if the checkbox is checked and both file uploaders are not empty
+      self.UploadData()
+    elif self.ProdDataToggle.checked and self.Consumption_FileLoader.file:
+      self.ErrorNoProductionData()
+    elif self.ProdDataToggle.checked and self.Production_FileLoader.file:
+      self.ErrorNoConsumptionData()
+    elif self.ProdDataToggle.checked:
+      self.ErrorNoConsumptionData()
+      self.ErrorNoProductionData()
+    elif self.Consumption_FileLoader:
+      self.ErrorNoConsumptionData()
+
+  def UploadData(self):
+    result = alert(content="Wilt u doorgaan naar de visualisatie of meer data uploaden?",
                title="Data succesvol geupload!",
                large=True,
                buttons=[
                  ("Ga door", "Load_Visualisatie"),
-                 ("Upload meer", "Load_prod_data_knop"),
-                 ("Neither", "Doe niks")
+                 ("Stop", "Doe niks")
                ])
+    print(f"The user chose {result}")
+    #anvil.server.call('getData', self.Consumption_FileLoader.file)
+    anvil.server.call('emit_server_ip', self.Consumption_FileLoader.file)
 
-      print(f"The user chose {result}")
-      #anvil.server.call('getData', self.file_loader_1.file)
-      anvil.server.call('emit_server_ip', self.file_loader_1.file)
-    else:
-      print("no file selected")
-      self.Uploadlabel.foreground = 'theme:Error'
-      self.Uploadlabel.bold = True
-    
+  def ErrorNoConsumptionData(self):
+      self.ConsumptionUploadlabel.foreground = 'theme:Error'
+      self.ConsumptionUploadlabel.bold = True
+
+  def ErrorNoProductionData(self):
+      self.ProductionUploadlabel.foreground = 'theme:Error'
+      self.ProductionUploadlabel.bold = True
+
+  #This method is called when a new file is loaded into ConsumptionFileLoader
+  def Consumption_FileLoader_change(self, file, **event_args):
+    self.ConsumptionUploadlabel.text = self.Consumption_FileLoader.file.name
+    self.ConsumptionUploadlabel.bold = True
     pass
-  #This method is called when a new file is loaded into this FileLoader
-  def file_loader_1_change(self, file, **event_args):
-    self.Uploadlabel.text = self.file_loader_1.file.name
-    self.Uploadlabel.bold = True
+
+  #This method is called when a new file is loaer in to ProductionFileLoader
+  def Production_FileLoader_change(self, file, **event_args):
+    self.ProductionUploadlabel.text = self.Production_FileLoader.file.name
+    self.ProductionUploadlabel.bold = True
     pass
+
+  #This method is called when the ProdDataToggle checkbox is changed
+  def ProdDataToggle_change(self, **event_args):
+    self.ProductionContentPanel.visible = self.ProdDataToggle.checked
+    self.ConsumptionUploadlabel.bold = False
+    self.ConsumptionUploadlabel.foreground = 'theme:On Surface'
+    self.ProductionUploadlabel.bold = False
+    self.ProductionUploadlabel.foreground = 'theme:On Surface'
+    pass
+
+
   

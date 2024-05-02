@@ -5,29 +5,56 @@ container:
 components:
 - type: ColumnPanel
   properties: {col_widths: '{}'}
-  name: content_panel
+  name: ContentPanel
   layout_properties: {slot: default}
   components:
-  - name: file_loader_1
-    properties: {text: Add file, file_types: '.csv,.xlsx', align: right}
+  - name: ProdDataToggle
+    properties: {text: With production data}
+    type: CheckBox
+    layout_properties: {grid_position: 'AVGOBG,ZHDALG'}
+    event_bindings: {change: ProdDataToggle_change}
+  - name: Consumption_Label
+    properties: {text: Consumption data, bold: true, align: right}
+    type: Label
+    layout_properties: {grid_position: 'FNLJUV,YIDIXR'}
+  - name: Consumption_FileLoader
+    properties: {text: Add file, file_types: '.csv,.xlsx', align: left}
     type: FileLoader
     layout_properties: {grid_position: 'FNLJUV,EFWGKE'}
-    event_bindings: {change: file_loader_1_change}
-  - name: Uploadlabel
+    event_bindings: {change: Consumption_FileLoader_change}
+  - name: ConsumptionUploadlabel
     properties: {text: '* .csv of .xlsx bestanden.', bold: false}
     type: Label
     layout_properties: {grid_position: 'FNLJUV,UQFYCJ'}
-  - name: button_1
-    properties: {text: Upload, background: 'theme:Primary', foreground: 'theme:On
-        Primary', icon_align: left, align: left, bold: false, tooltip: Upload your csv document here.}
-    type: Button
-    layout_properties: {grid_position: 'FNLJUV,ABOGJL'}
-    event_bindings: {click: button_1_click}
-    data_bindings: []
+  - name: ProductionContentPanel
+    properties: {col_widths: '{}', visible: false}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'PZZXUE,DWKWSL'}
+    components:
+    - name: Production_Label
+      properties: {text: Production data, bold: true, align: right}
+      type: Label
+      layout_properties: {grid_position: 'FNLJUV,YIDIXR'}
+    - name: Production_FileLoader
+      properties: {text: Add file, file_types: '.csv,.xlsx', align: left}
+      type: FileLoader
+      layout_properties: {grid_position: 'FNLJUV,EFWGKE'}
+      event_bindings: {change: Production_FileLoader_change}
+    - name: ProductionUploadlabel
+      properties: {text: '* .csv of .xlsx bestanden.', bold: false}
+      type: Label
+      layout_properties: {grid_position: 'FNLJUV,UQFYCJ'}
   - name: spacer_1
     properties: {height: 32}
     type: Spacer
     layout_properties: {grid_position: 'ORBVFH,MHNDJD'}
+  - name: UploadData
+    properties: {text: Upload, background: 'theme:Primary', foreground: 'theme:On
+        Primary', icon_align: left, align: left, bold: false, tooltip: Upload your csv document here.}
+    type: Button
+    layout_properties: {grid_position: 'ORBVFH,OEPEKE'}
+    event_bindings: {click: UploadData_Click}
+    data_bindings: []
 - type: FlowPanel
   properties: {}
   name: navbar_links
