@@ -1,7 +1,6 @@
 from ._anvil_designer import Form1Template
 from anvil import *
 import plotly.graph_objects as go
-import pandas as pd
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
@@ -13,14 +12,6 @@ class Form1(Form1Template):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     # Any code you write here will run before the form opens.
-
-    # Voorbeeld DataFrame
-    df = pd.DataFrame({
-        'Tijd': ['2024-01-01', '2024-01-02', '2024-01-03'],
-        'Elektriciteit': [100, 150, 130],
-        'Gas': [80, 90, 85],
-        'Productie': [200, 210, 205]
-    })
     
     # Creëren van de grafiek
     fig = go.Figure()
