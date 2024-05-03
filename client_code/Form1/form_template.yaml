@@ -80,10 +80,6 @@ components:
       properties: {}
       type: Plot
       layout_properties: {grid_position: 'BFEMWM,ZRKQYP'}
-    - name: flow_panel_1
-      properties: {}
-      type: FlowPanel
-      layout_properties: {grid_position: 'ISENUF,TTQVAQ'}
     - name: UploadData_copy_copy
       properties: {text: Ga door naar dashboard., background: 'theme:Primary', foreground: 'theme:On
           Primary', icon_align: left, align: right, bold: false, tooltip: ''}
