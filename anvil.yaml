@@ -6,9 +6,9 @@ services:
 - source: /runtime/services/anvil/files.yml
   client_config: {}
   server_config: {file_table: files}
-package_name: Pydantic_test
+package_name: _3EM_Frontend
 allow_embedding: false
-name: Pydantic test
+name: 3EM Frontend
 runtime_options:
   version: 2
   client_version: '3'

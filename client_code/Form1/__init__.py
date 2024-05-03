@@ -1,10 +1,11 @@
 from ._anvil_designer import Form1Template
 from anvil import *
+import anvil.users
 import plotly.graph_objects as go
+import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-import anvil.server
 
 
 class Form1(Form1Template):  
@@ -106,5 +107,41 @@ class Form1(Form1Template):
     self.DefaultLabelState()
     pass
 
+  def submit_button_click(self, **event_args):    
+    energy_calc_output = anvil.server.call('get_data',
+                      country,
+                      street_name,
+                      house_number,
+                      city,
+                      zip_code,
+                      roof_area
+                     )    
+    energy_calc_output_text = energy_calc_output[0]
+        
+    self.output_text_area.text = energy_calc_output_text
+    Notification('Your house info has been submitted!').show()
+    
+    energy_plot_data = energy_calc_output[1]
+    self.configure_energy_plot(energy_plot_data)
+
+  def configure_energy_plot(self, energy_plot_data):
+      
+      self.plot_object.layout = {
+      'title': 'Consumption and production Data',
+      'xaxis': {
+        'title': 'Month number'
+      }
+      }
+      self.plot_object.layout.yaxis.title = 'Electricity production /kWh'
+        
+      
+      # Plot some data
+      self.plot_object.data = [
+        go.Bar(
+          x = [*range(1, 12, 1)],
+          y = energy_plot_data,
+          name = 'Bar Chart Example'
+        )
+      ]
 
   
