@@ -31,6 +31,9 @@ class Form1(Form1Template):
     else:
       self.ErrorNoConsumptionData()
 
+  def TEMPUPLOAD(self, **event_args):
+    self.submit_button_click()
+
   def UploadData(self):
     result = alert(content="Wilt u doorgaan naar de visualisatie?",
                title="Data succesvol geupload!",
