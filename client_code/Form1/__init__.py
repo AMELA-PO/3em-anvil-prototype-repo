@@ -27,7 +27,6 @@ class Form1(Form1Template):
       self.ErrorNoConsumptionData()
       self.ErrorNoProductionData()
     elif self.Consumption_FileLoader.file is not None:
-      print('ONLY UPLOAD CONSUMPTION DATA')
       self.submit_button_click()
     else:
       self.ErrorNoConsumptionData()
