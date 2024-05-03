@@ -75,7 +75,11 @@ components:
     - name: plot_1
       properties: {}
       type: Plot
-      layout_properties: {grid_position: 'JZLEUJ,JQUQLK'}
+      layout_properties: {grid_position: 'MAAWIT,HKDLQY'}
+    - name: plot_2
+      properties: {}
+      type: Plot
+      layout_properties: {grid_position: 'NDQSBP,HQYMFG'}
 - type: FlowPanel
   properties: {}
   name: navbar_links

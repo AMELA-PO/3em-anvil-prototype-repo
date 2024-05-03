@@ -89,36 +89,47 @@ class Form1(Form1Template):
     pass
 
   def submit_button_click(self, **event_args):    
-    data = anvil.server.call('get_data', 'Gas')    
-    self.configure_energy_plot(data)
+    gas_data = anvil.server.call('get_data', 'Gas')  
+    electricity_data = anvil.server.call('get_data', 'Electricity')  
+    self.configure_energy_plot(gas_data, self.plot_1, 'Gas','orange')
+    self.configure_energy_plot(electricity_data, self.plot_2, 'Electricity','blue')
 
-  def configure_energy_plot(self, plot_data):
+  def configure_energy_plot(self, plot_data, plot_object, plot_name, plot_color):
     # Create a Plotly figure
     start_timestamp = plot_data[0]['Timestamp']  # First timestamp
     end_timestamp = plot_data[19]['Timestamp']  # 20th timestamp
     for item in plot_data:
       print(item["Consumption"])
     #print(plot_data)
+    
     # Create a Plotly figure
     fig = go.Figure(data=[go.Scatter(
         x=[item['Timestamp'] for item in plot_data],
         y=[item['Consumption'] for item in plot_data],
-        mode='lines+markers',
+        mode='lines',
+        line=dict(
+        color=plot_color,  # Set line color to orange
+        width=2  # Optional: Set line width
+        ),
         name='Consumption'
     )])
     
     # Update layout
     fig.update_layout(
-        title='Energy Consumption Over Time',
+        title=plot_name+' Consumption Over Time',
         xaxis_title='Time',
         yaxis_title='Consumption',
         xaxis=dict(
-        tickformat="%Y-%m-%d %H:%M:%S",
-        range=[start_timestamp, end_timestamp]  # Set the initial zoom range
+          tickformat='%Y-%m-%d %H',
+          type='date',  # Ensure the x-axis is treated as date
+          #range=[start_timestamp, end_timestamp]  # Set the initial zoom range
+        ),
+        yaxis=dict(
+          autorange=True  # Enable automatic scaling based on the data
         )
     )
     
     # Display the figure in Anvil's Plot component
-    self.plot_1.figure = fig
+    plot_object.figure = fig
 
   
