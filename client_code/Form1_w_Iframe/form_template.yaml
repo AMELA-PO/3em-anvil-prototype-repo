@@ -1,0 +1,82 @@
+is_package: true
+container:
+  type: HtmlTemplate
+  properties: {html: '@theme:standard-page.html'}
+components:
+- type: ColumnPanel
+  properties: {col_widths: '{}'}
+  name: Page1
+  layout_properties: {slot: default}
+  components:
+  - name: DataContentPanel
+    properties: {col_widths: '{}'}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'IZJAWJ,WFSDPT'}
+    components:
+    - name: ProdDataToggle
+      properties: {text: With production data}
+      type: CheckBox
+      layout_properties: {grid_position: 'QWHSGG,SCGGDF'}
+      event_bindings: {change: ProdDataToggle_change}
+    - name: Consumption_Label
+      properties: {text: Consumption data, bold: true, align: right}
+      type: Label
+      layout_properties: {grid_position: 'CQZFNG,OYGGLH'}
+    - name: Consumption_FileLoader
+      properties: {text: Add file, file_types: '.csv,.xlsx', align: left}
+      type: FileLoader
+      layout_properties: {grid_position: 'CQZFNG,HIBUQP'}
+      event_bindings: {change: Consumption_FileLoader_change}
+    - name: ConsumptionUploadlabel
+      properties: {text: '* .csv of .xlsx bestanden.', bold: false}
+      type: Label
+      layout_properties: {grid_position: 'CQZFNG,ODLNXP'}
+    - name: ProductionContentPanel
+      properties: {col_widths: '{}', visible: false}
+      type: ColumnPanel
+      layout_properties: {grid_position: 'JPHCCL,EMPZSU'}
+      components:
+      - name: Production_Label
+        properties: {text: Production data, bold: true, align: right}
+        type: Label
+        layout_properties: {grid_position: 'FNLJUV,YIDIXR'}
+      - name: Production_FileLoader
+        properties: {text: Add file, file_types: '.csv,.xlsx', align: left}
+        type: FileLoader
+        layout_properties: {grid_position: 'FNLJUV,EFWGKE'}
+        event_bindings: {change: Production_FileLoader_change}
+      - name: ProductionUploadlabel
+        properties: {text: '* .csv of .xlsx bestanden.', bold: false}
+        type: Label
+        layout_properties: {grid_position: 'FNLJUV,UQFYCJ'}
+    - name: ClearData
+      properties: {text: Clear Data, background: 'theme:Primary', foreground: 'theme:On
+          Primary', icon_align: left, align: right, bold: false, tooltip: Upload your csv document here.}
+      type: Button
+      layout_properties: {grid_position: 'UXSJIN,VSZVLE'}
+      event_bindings: {click: ClearData_click}
+      data_bindings: []
+    - name: spacer_1
+      properties: {height: 32}
+      type: Spacer
+      layout_properties: {grid_position: 'UXSJIN,TEMJPH'}
+    - name: UploadData_copy
+      properties: {text: Upload, background: 'theme:Primary', foreground: 'theme:On
+          Primary', icon_align: left, align: left, bold: false, tooltip: Upload your csv document here.}
+      type: Button
+      layout_properties: {grid_position: 'UXSJIN,GHXZWV'}
+      event_bindings: {click: UploadData_Click}
+      data_bindings: []
+  - name: VisualisatiePanel
+    properties: {col_widths: '{}', visible: true}
+    type: ColumnPanel
+    layout_properties: {grid_position: 'UINPJX,QBFXYL'}
+    components:
+    - name: flow_panel_iframe
+      properties: {align: center, role: ModelViewer, spacing: medium, vertical_align: full}
+      type: FlowPanel
+      layout_properties: {grid_position: 'ECRAZG,YENCAY'}
+- type: FlowPanel
+  properties: {}
+  name: navbar_links
+  layout_properties: {slot: nav-right}
