@@ -29,6 +29,8 @@ class Form1(Form1Template):
     elif self.Consumption_FileLoader.file is not None:
       print('ONLY UPLOAD CONSUMPTION DATA')
       self.submit_button_click()
+    else:
+      self.ErrorNoConsumptionData()
 
   def UploadData(self):
     result = alert(content="Wilt u doorgaan naar de visualisatie?",
