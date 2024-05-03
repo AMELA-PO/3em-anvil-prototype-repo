@@ -135,4 +135,8 @@ class Form1(Form1Template):
     self.VisualisatiePanel.visible = False
     self.ResetButton.visible = False
 
+  def GotoDashboard(self, **event_args):
+      open_form('Dashboard')
+      pass
+
   
