@@ -1,6 +1,5 @@
 from ._anvil_designer import Form1Template
 from anvil import *
-import anvil.users
 import plotly.graph_objects as go
 import anvil.server
 import anvil.tables as tables
@@ -13,33 +12,13 @@ class Form1(Form1Template):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     # Any code you write here will run before the form opens.
-    
-    # Creëren van de grafiek
-    fig = go.Figure()
-    
-    # Toevoegen van de elektriciteitslijn
-    fig.add_trace(go.Scatter(x=df['Tijd'], y=df['Elektriciteit'], mode='lines', name='Elektriciteit'))
-    
-    # Toevoegen van de gaslijn
-    fig.add_trace(go.Scatter(x=df['Tijd'], y=df['Gas'], mode='lines', name='Gas'))
-    
-    # Toevoegen van de productielijn
-    fig.add_trace(go.Scatter(x=df['Tijd'], y=df['Productie'], mode='lines', name='Productie'))
-    
-    # Update layout
-    fig.update_layout(title='Elektriciteit, Gas en Productie Over Tijd',
-                      xaxis_title='Tijd',
-                      yaxis_title='Waarde')
-    
-    # Toon de grafiek in Anvil met Plot component
-    self.plot_1.figure = fig
 
   #This method is called when the button is clicked
   def UploadData_Click(self, **event_args):
     if self.ProdDataToggle.checked and self.Consumption_FileLoader.file and self.Production_FileLoader.file:
       # Code to execute if the checkbox is checked and both file uploaders are not empty
       print("UPLOAD CONSUMPTION AND PRODUCTION DATA")
-      self.UploadData()
+      self.submit_button_click()
     elif self.ProdDataToggle.checked and self.Consumption_FileLoader.file:
       self.ErrorNoProductionData()
     elif self.ProdDataToggle.checked and self.Production_FileLoader.file:
@@ -47,9 +26,9 @@ class Form1(Form1Template):
     elif self.ProdDataToggle.checked:
       self.ErrorNoConsumptionData()
       self.ErrorNoProductionData()
-    elif self.Consumption_FileLoader.file != None:
+    elif self.Consumption_FileLoader.file is not None:
       print('ONLY UPLOAD CONSUMPTION DATA')
-      self.UploadData()
+      self.submit_button_click()
 
   def UploadData(self):
     result = alert(content="Wilt u doorgaan naar de visualisatie?",
@@ -108,40 +87,31 @@ class Form1(Form1Template):
     pass
 
   def submit_button_click(self, **event_args):    
-    energy_calc_output = anvil.server.call('get_data',
-                      country,
-                      street_name,
-                      house_number,
-                      city,
-                      zip_code,
-                      roof_area
-                     )    
-    energy_calc_output_text = energy_calc_output[0]
-        
-    self.output_text_area.text = energy_calc_output_text
-    Notification('Your house info has been submitted!').show()
-    
-    energy_plot_data = energy_calc_output[1]
-    self.configure_energy_plot(energy_plot_data)
+    data = anvil.server.call('get_data', 'Gas')    
+    self.configure_energy_plot(data)
 
-  def configure_energy_plot(self, energy_plot_data):
-      
-      self.plot_object.layout = {
-      'title': 'Consumption and production Data',
-      'xaxis': {
-        'title': 'Month number'
-      }
-      }
-      self.plot_object.layout.yaxis.title = 'Electricity production /kWh'
-        
-      
-      # Plot some data
-      self.plot_object.data = [
-        go.Bar(
-          x = [*range(1, 12, 1)],
-          y = energy_plot_data,
-          name = 'Bar Chart Example'
-        )
-      ]
+  def configure_energy_plot(self, plot_data):
+    # Create a Plotly figure
+    for item in plot_data:
+      print(item["Consumption"])
+    #print(plot_data)
+    # Create a Plotly figure
+    fig = go.Figure(data=[go.Scatter(
+        x=[item['Timestamp'] for item in plot_data],
+        y=[item['Consumption'] for item in plot_data],
+        mode='lines+markers',
+        name='Consumption'
+    )])
+    
+    # Update layout
+    fig.update_layout(
+        title='Energy Consumption Over Time',
+        xaxis_title='Time',
+        yaxis_title='Consumption',
+        xaxis=dict(tickformat="%Y-%m-%d %H:%M:%S")
+    )
+    
+    # Display the figure in Anvil's Plot component
+    self.plot_1.figure = fig
 
   
