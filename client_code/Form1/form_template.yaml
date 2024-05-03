@@ -85,7 +85,7 @@ components:
           Primary', icon_align: left, align: right, bold: false, tooltip: ''}
       type: Button
       layout_properties: {grid_position: 'EDSWLV,RCONFQ'}
-      event_bindings: {click: UploadData_copy_copy_click}
+      event_bindings: {click: GotoDashboard}
       data_bindings: []
 - type: FlowPanel
   properties: {}
