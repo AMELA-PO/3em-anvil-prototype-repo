@@ -1,7 +1,7 @@
 container: {type: ColumnPanel}
 components:
 - name: image_1
-  properties: {source: _/theme/beautiful_dashboard.png, height: 557.84375}
+  properties: {source: _/theme/beautiful_dashboard.png, height: 771.90625, display_mode: fill_width}
   type: Image
   layout_properties: {grid_position: 'WYZRDR,ISIBZM'}
 is_package: true
