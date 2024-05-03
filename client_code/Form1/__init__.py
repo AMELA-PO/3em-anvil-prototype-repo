@@ -93,15 +93,11 @@ class Form1(Form1Template):
     electricity_data = anvil.server.call('get_data', 'Electricity')  
     self.configure_energy_plot(gas_data, self.plot_1, 'Gas','orange')
     self.configure_energy_plot(electricity_data, self.plot_2, 'Electricity','blue')
+    self.DataContentPanel.visible = False
+    self.VisualisatiePanel.visible = True
+    self.ResetButton.visible = True
 
-  def configure_energy_plot(self, plot_data, plot_object, plot_name, plot_color):
-    # Create a Plotly figure
-    start_timestamp = plot_data[0]['Timestamp']  # First timestamp
-    end_timestamp = plot_data[19]['Timestamp']  # 20th timestamp
-    for item in plot_data:
-      print(item["Consumption"])
-    #print(plot_data)
-    
+  def configure_energy_plot(self, plot_data, plot_object, plot_name, plot_color): 
     # Create a Plotly figure
     fig = go.Figure(data=[go.Scatter(
         x=[item['Timestamp'] for item in plot_data],
@@ -131,5 +127,10 @@ class Form1(Form1Template):
     
     # Display the figure in Anvil's Plot component
     plot_object.figure = fig
+    
+  def Resetpage(self, **event_args):
+    self.DataContentPanel.visible = True
+    self.VisualisatiePanel.visible = False
+    self.ResetButton.visible = False
 
   
