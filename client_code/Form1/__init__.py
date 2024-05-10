@@ -13,8 +13,11 @@ class Form1(Form1Template):
     self.init_components(**properties)
       
     # Any code you write here will run before the form opens.
-    media = anvil.server.call('render_chart_prodcon')
-    self.iframe_prodcon.url = media.get_url(True)
+    media = anvil.server.call('render_chart_scatter')
+    self.iframe_chart_scatter.url = media.get_url(True)
+      
+    media = anvil.server.call('render_chart_heatbar')
+    self.iframe_chart_heatbar.url = media.get_url(True)
 
   def UploadData_Click(self, **event_args):
     if self.ProdDataToggle.checked and self.Consumption_FileLoader.file and self.Production_FileLoader.file:

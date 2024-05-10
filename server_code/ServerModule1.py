@@ -40,7 +40,7 @@ def get_data(sheet_name='Electricity'):
   # return [energy_calc_output_text, monthly_pv_output]
 
 @anvil.server.callable
-def render_chart_prodcon():
+def render_chart_heatbar():
     df = load_data_prodcon()
 
     brush = alt.selection_interval(encodings=['x'])
@@ -64,9 +64,9 @@ def render_chart_prodcon():
 
     chart = alt.vconcat(upper, lower)
 
-    chart.save('/tmp/chart_prodcon.html')
+    chart.save('/tmp/chart_heatbar.html')
     
-    return anvil.media.from_file('/tmp/chart_prodcon.html', 'text/html')
+    return anvil.media.from_file('/tmp/chart_heatbar.html', 'text/html')
 
 def load_data_prodcon():
     file = data_files['production_consumption-2.csv']
@@ -77,10 +77,10 @@ def render_chart_scatter():
     df = load_data_prodcon()
     
     chart = alt.Chart(df).mark_circle(size=60).encode(
-        x='production:Q',
-        y='consumption:Q',
+        x='consumption:Q',
+        y='production:Q',
     )
 
-    chart.save('tmp/chart_scatter.html')
+    chart.save('/tmp/chart_scatter.html')
     
-    return anvil.media.from_file('/tmp/chart_prodcon.html', 'text/html')
+    return anvil.media.from_file('/tmp/chart_scatter.html', 'text/html')

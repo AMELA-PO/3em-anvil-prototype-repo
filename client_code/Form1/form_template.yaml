@@ -80,7 +80,11 @@ components:
       properties: {}
       type: Plot
       layout_properties: {grid_position: 'CYUWJS,TQICPB'}
-    - name: iframe_prodcon
+    - name: iframe_chart_scatter
+      properties: {}
+      type: form:dep_3ik6lndklq0lfs:IFrame
+      layout_properties: {grid_position: 'NOXJVH,WBMESB'}
+    - name: iframe_chart_heatbar
       properties: {}
       type: form:dep_3ik6lndklq0lfs:IFrame
       layout_properties: {grid_position: 'AZSCKT,IUGCHD', full_width_row: false}
