@@ -69,7 +69,7 @@ def render_chart_heatbar():
     return anvil.media.from_file('/tmp/chart_heatbar.html', 'text/html')
 
 def load_data_prodcon():
-    file = data_files['production_consumption-2.csv']
+    file = data_files['gas_consumption_production.csv']
     return pd.read_csv(file)
 
 @anvil.server.callable
