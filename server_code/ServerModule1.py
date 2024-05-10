@@ -46,8 +46,8 @@ def render_chart_heatbar():
     brush = alt.selection_interval(encodings=['x'])
 
     base = alt.Chart(df).mark_bar().encode(
-        # alt.X("datetime:T", bin=alt.Bin(step=0.5)),
-        x="datetime:T",
+        # alt.X("timestamp:T", bin=alt.Bin(step=0.5)),
+        x="timestamp:T",
         y="production:Q",
         color=alt.Color("consumption:Q", scale=alt.Scale(scheme="viridis"), title="Consumption"),
     ).properties(
@@ -56,7 +56,7 @@ def render_chart_heatbar():
         height=400
     )
 
-    upper = base.encode(alt.X('datetime:T').scale(domain=brush))
+    upper = base.encode(alt.X('timestamp:T').scale(domain=brush))
 
     lower = base.properties(
         height=60
