@@ -28,20 +28,32 @@ components:
   properties: {text: 25 kWh}
   type: Label
   layout_properties: {grid_position: 'PWDVJQ,BEDHQR ISPOFW,CODPSA'}
-- name: Plot_linechart_gas_oldnieuw
+- name: Plot_LineChart_Gas_Old_Nieuw
   properties: {}
   type: Plot
   layout_properties: {grid_position: 'FIANRQ,WGECIF'}
-- name: label_1_copy_3
+- name: Label_Gas_Voor
   properties: {text: 'Totale gas voor:'}
   type: Label
-  layout_properties: {grid_position: 'FIANRQ,LVIFUI YLUZKH,MCIBVI'}
-- name: label_1_copy_copy
+  layout_properties: {grid_position: 'FIANRQ,RAODTG HCFNVJ,CLKLVQ'}
+- name: Gas_Voor_Waarde
+  properties: {text: 25 kWh}
+  type: Label
+  layout_properties: {grid_position: 'FIANRQ,RAODTG HCFNVJ,WJUTHC'}
+- name: Label_Gas_Na
   properties: {text: 'Totale gas na:'}
   type: Label
-  layout_properties: {grid_position: 'FIANRQ,LVIFUI VMIIRJ,FPALDA'}
-- name: label_1_copy_2_copy
+  layout_properties: {grid_position: 'FIANRQ,RAODTG PBFEUD,MFJIOU'}
+- name: Gas_Na_Waarde
+  properties: {text: 25 kWh}
+  type: Label
+  layout_properties: {grid_position: 'FIANRQ,RAODTG PBFEUD,DWIRQU'}
+- name: Label_Gas_Besparing
   properties: {text: 'Besparing:'}
   type: Label
-  layout_properties: {grid_position: 'FIANRQ,LVIFUI OEOXMO,DOLIVD'}
+  layout_properties: {grid_position: 'FIANRQ,RAODTG XXZZJL,WZUXAW'}
+- name: Gas_Besparing_Waarde
+  properties: {text: 25 kWh}
+  type: Label
+  layout_properties: {grid_position: 'FIANRQ,RAODTG XXZZJL,XKRCXA'}
 is_package: true
