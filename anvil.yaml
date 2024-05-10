@@ -1,4 +1,7 @@
-dependencies: []
+dependencies:
+- dep_id: dep_3ik6lndklq0lfs
+  version: {dev: false}
+  resolution_hints: {app_id: 2ERCRHI3RFEHYYME, name: 3EM - IFrame Component, package_name: IFrame}
 services:
 - source: /runtime/services/tables.yml
   client_config: {}
@@ -6,9 +9,9 @@ services:
 - source: /runtime/services/anvil/files.yml
   client_config: {}
   server_config: {file_table: files}
-package_name: _3EM_Frontend
+package_name: '[3EM]_Frontend'
 allow_embedding: false
-name: 3EM Frontend
+name: '[3EM] Frontend'
 runtime_options:
   version: 2
   client_version: '3'
