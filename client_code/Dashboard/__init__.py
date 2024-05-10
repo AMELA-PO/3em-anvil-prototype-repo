@@ -11,17 +11,29 @@ class Dashboard(DashboardTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-        self.LoadAreaChart(self.Plot_AreaChart)
 
+        self.drop_down_kpi.selected_value = self.drop_down_kpi.placeholder
+
+        self.Energy_Performance_Panel.visible = True
+        self.Toggle_Preformance.icon = "fa:caret-down"
+        self.Financial_Performance_Panel.visible = True
+        self.Toggle_Financials.icon = "fa:caret-down"
         # Any code you write here will run before the form opens.
-    def LoadAreaChart(self, plot_object, **event_args):
-        fig = go.Figure()
-        fig.add_trace(go.Scatter(x=[1, 2, 3, 4], y=[0, 2, 3, 5], fill='tozeroy',
-                            mode='none' # override default markers+lines
-                            ))
-        fig.add_trace(go.Scatter(x=[1, 2, 3, 4], y=[3, 5, 1, 7], fill='tonexty',
-                            mode= 'none'))
-        
-        #fig.show()
-        # Display the figure in Anvil's Plot component
-        plot_object.figure = fig
+
+    def Toggle_Preformance_click(self, **event_args):
+        if self.Energy_Performance_Panel.visible:
+            self.Energy_Performance_Panel.visible = False
+            self.Toggle_Preformance.icon = "fa:caret-right"
+        else:
+            self.Energy_Performance_Panel.visible = True
+            self.Toggle_Preformance.icon = "fa:caret-down"
+        pass
+
+    def Toggle_Financials_click(self, **event_args):
+        if self.Financial_Performance_Panel.visible:
+            self.Financial_Performance_Panel.visible = False
+            self.Toggle_Financials.icon = "fa:caret-right"
+        else:
+            self.Financial_Performance_Panel.visible = True
+            self.Toggle_Financials.icon = "fa:caret-down"
+        pass
