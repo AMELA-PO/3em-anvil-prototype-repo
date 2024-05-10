@@ -8,6 +8,7 @@ from anvil.files import data_files
 from datetime import datetime
 from plotly import graph_objects as go
 import pandas as pd
+import altair as alt
 
 
 @anvil.server.callable
@@ -38,14 +39,14 @@ def get_data(sheet_name='Electricity'):
   
   # return [energy_calc_output_text, monthly_pv_output]
 
-
 @anvil.server.callable
 def render_chart_prodcon():
-    import altair as alt
-
     df = load_data_prodcon()
 
-    chart = alt.Chart(df).mark_bar().encode(
+    brush = alt.selection_interval(encodings=['x'])
+
+    base = alt.Chart(df).mark_bar().encode(
+        # alt.X("datetime:T", bin=alt.Bin(step=0.5)),
         x="datetime:T",
         y="production:Q",
         color=alt.Color("consumption:Q", scale=alt.Scale(scheme="viridis"), title="Consumption"),
@@ -55,10 +56,31 @@ def render_chart_prodcon():
         height=400
     )
 
-    chart.save('/tmp/altair.html')
+    upper = base.encode(alt.X('datetime:T').scale(domain=brush))
+
+    lower = base.properties(
+        height=60
+    ).add_params(brush)
+
+    chart = alt.vconcat(upper, lower)
+
+    chart.save('/tmp/chart_prodcon.html')
     
-    return anvil.media.from_file('/tmp/altair.html', 'text/html')
+    return anvil.media.from_file('/tmp/chart_prodcon.html', 'text/html')
 
 def load_data_prodcon():
     file = data_files['production_consumption-2.csv']
     return pd.read_csv(file)
+
+@anvil.server.callable
+def render_chart_scatter():
+    df = load_data_prodcon()
+    
+    chart = alt.Chart(df).mark_circle(size=60).encode(
+        x='production:Q',
+        y='consumption:Q',
+    )
+
+    chart.save('tmp/chart_scatter.html')
+    
+    return anvil.media.from_file('/tmp/chart_prodcon.html', 'text/html')

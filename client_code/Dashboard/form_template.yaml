@@ -1,23 +1,37 @@
 container: {type: ColumnPanel}
 components:
-- name: Plot_GaugeMeter
+- name: Plot_LineChart_Electricity_Old_nieuw
   properties: {}
   type: Plot
-  layout_properties: {grid_position: 'UMVWGP,VLMMIE'}
-- name: Plot_AreaChart
+  layout_properties: {grid_position: 'PWDVJQ,VXOVRE'}
+- name: rich_text_1
+  properties: {content: 'totale electriciteit voor:'}
+  type: RichText
+  layout_properties: {grid_position: 'PWDVJQ,BEDHQR ZRPQYJ,FAEUPG'}
+  components: []
+- name: rich_text_1_copy
+  properties: {content: 'totale electriciteit Na:'}
+  type: RichText
+  layout_properties: {grid_position: 'PWDVJQ,BEDHQR SFGRUE,SGWACQ'}
+- name: rich_text_1_copy_2
+  properties: {content: 'Besparing electriciteit:'}
+  type: RichText
+  layout_properties: {grid_position: 'PWDVJQ,BEDHQR MBBQWN,RUCFSR'}
+  components: []
+- name: Plot_linechart_gas_oldnieuw
   properties: {}
   type: Plot
-  layout_properties: {grid_position: 'ZPMODN,BPVNBI NKMTCX,YTEZGR'}
-- name: Plot_PieChart
-  properties: {}
-  type: Plot
-  layout_properties: {grid_position: 'ZPMODN,BPVNBI NKUTMC,VLECTN'}
-- name: Plot_LineChart
-  properties: {}
-  type: Plot
-  layout_properties: {grid_position: 'ZPMODN,LKCWNN PWDVJQ,VXOVRE'}
-- name: Plot_HeatMap
-  properties: {}
-  type: Plot
-  layout_properties: {grid_position: 'ZPMODN,LKCWNN FIANRQ,WGECIF'}
+  layout_properties: {grid_position: 'FIANRQ,WGECIF'}
+- name: rich_text_1_copy_2_copy
+  properties: {content: 'Besparing gas:'}
+  type: RichText
+  layout_properties: {grid_position: 'FIANRQ,ASIGDP'}
+- name: rich_text_1_copy_copy
+  properties: {content: 'totale gas Na:'}
+  type: RichText
+  layout_properties: {grid_position: 'FIANRQ,ASIGDP'}
+- name: rich_text_1_copy_3
+  properties: {content: 'totale gas voor:'}
+  type: RichText
+  layout_properties: {grid_position: 'FIANRQ,ASIGDP'}
 is_package: true
