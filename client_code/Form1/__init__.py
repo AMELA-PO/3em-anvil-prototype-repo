@@ -11,9 +11,11 @@ class Form1(Form1Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+      
     # Any code you write here will run before the form opens.
+    media = anvil.server.call('render_chart_prodcon')
+    self.iframe_prodcon.url = media.get_url(True)
 
-  #This method is called when the button is clicked
   def UploadData_Click(self, **event_args):
     if self.ProdDataToggle.checked and self.Consumption_FileLoader.file and self.Production_FileLoader.file:
       # Code to execute if the checkbox is checked and both file uploaders are not empty

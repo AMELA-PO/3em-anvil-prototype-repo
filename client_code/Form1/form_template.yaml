@@ -72,6 +72,10 @@ components:
     type: ColumnPanel
     layout_properties: {grid_position: 'UINPJX,QBFXYL'}
     components:
+    - name: iframe_prodcon
+      properties: {}
+      type: form:dep_3ik6lndklq0lfs:IFrame
+      layout_properties: {grid_position: 'AZSCKT,IUGCHD', full_width_row: false}
     - name: plot_1
       properties: {}
       type: Plot

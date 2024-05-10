@@ -37,3 +37,28 @@ def get_data(sheet_name='Electricity'):
   #                         + "\n \n" + "Check out your expected monthly electricity production below!"
   
   # return [energy_calc_output_text, monthly_pv_output]
+
+
+@anvil.server.callable
+def render_chart_prodcon():
+    import altair as alt
+
+    df = load_data_prodcon()
+
+    chart = alt.Chart(df).mark_bar().encode(
+        x="datetime:T",
+        y="production:Q",
+        color=alt.Color("consumption:Q", scale=alt.Scale(scheme="viridis"), title="Consumption"),
+    ).properties(
+        title="Production vs Consumption",
+        width=800,
+        height=400
+    )
+
+    chart.save('/tmp/altair.html')
+    
+    return anvil.media.from_file('/tmp/altair.html', 'text/html')
+
+def load_data_prodcon():
+    file = data_files['production_consumption-2.csv']
+    return pd.read_csv(file)
