@@ -11,14 +11,14 @@ components:
   layout_properties: {grid_position: 'BFGCRN,BLKDMY'}
   components:
   - name: Electriciteit_Panel
-    properties: {col_widths: '{"STQKYH":35,"IDARCW":15,"BVZDZI":10}'}
+    properties: {col_widths: '{"IDARCW":15,"BVZDZI":16}'}
     type: ColumnPanel
     layout_properties: {grid_position: 'GXTYRJ,GNASCQ'}
     components:
     - name: Plot_LineChart_Electricity_Old_Nieuw
       properties: {height: 279.3125}
       type: Plot
-      layout_properties: {grid_position: 'CXBDOV,STQKYH'}
+      layout_properties: {grid_position: 'SIQUSB,NVHEMF'}
     - name: Label_Electricteit_Voor
       properties: {text: 'Total electricity consumption before:'}
       type: Label
@@ -43,15 +43,15 @@ components:
       properties: {text: -208.20 %}
       type: Label
       layout_properties: {grid_position: 'CXBDOV,BVZDZI WJALVH,LONVCI'}
+  - name: Plot_LineChart_Gas_Old_Nieuw
+    properties: {height: 299.546875}
+    type: Plot
+    layout_properties: {grid_position: 'ZCJRAP,WMBEJQ'}
   - name: Gas_Panel
-    properties: {col_widths: '{"LTRZCM":35,"RQODCN":15,"ROCXRL":10}'}
+    properties: {col_widths: '{"RQODCN":15,"ROCXRL":16}'}
     type: ColumnPanel
     layout_properties: {grid_position: 'BKLXCE,PBWBPZ'}
     components:
-    - name: Plot_LineChart_Gas_Old_Nieuw
-      properties: {height: 299.546875}
-      type: Plot
-      layout_properties: {grid_position: 'EAPZUV,LTRZCM'}
     - name: Label_Gas_Voor
       properties: {text: 'Total gas consumption before:'}
       type: Label
@@ -77,7 +77,7 @@ components:
       type: Label
       layout_properties: {grid_position: 'EAPZUV,ROCXRL EQJLND,EEWJFB'}
   - name: CO2_Emission_Panel
-    properties: {col_widths: '{"RQODCN":20,"ROCXRL":19}'}
+    properties: {col_widths: '{"RQODCN":20,"ROCXRL":25}'}
     type: ColumnPanel
     layout_properties: {grid_position: 'TSCPGT,THSXPZ'}
     components:
