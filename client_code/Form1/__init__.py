@@ -119,6 +119,10 @@ class Form1(Form1Template):
     self.ResetButton.visible = True
 
   def configure_energy_plot(self, plot_data, plot_object, plot_name, plot_color): 
+    # Get the first and last entries of the dictionary plot_data_old
+    first_date = plot_data[0]['Timestamp']
+    last_date = plot_data[-1]['Timestamp']
+      
     # Create a Plotly figure
     fig = go.Figure(data=[go.Scatter(
         x=[item['Timestamp'] for item in plot_data],
@@ -140,6 +144,8 @@ class Form1(Form1Template):
           tickformat='%Y-%m-%d %H',
           type='date',  # Ensure the x-axis is treated as date
           #range=[0, 500],  # Set the initial zoom range
+          minallowed=first_date,
+          maxallowed=last_date
         ),
         yaxis=dict(
           autorange=True,  # Enable automatic scaling based on the data
