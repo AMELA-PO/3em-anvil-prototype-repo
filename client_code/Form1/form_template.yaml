@@ -85,9 +85,10 @@ components:
       type: form:dep_3ik6lndklq0lfs:IFrame
       layout_properties: {grid_position: 'NOXJVH,WBMESB'}
     - name: iframe_chart_heatbar
-      properties: {}
+      properties: {height: '680'}
       type: form:dep_3ik6lndklq0lfs:IFrame
-      layout_properties: {grid_position: 'AZSCKT,IUGCHD', full_width_row: false}
+      layout_properties: {grid_position: 'AZSCKT,IUGCHD', full_width_row: false, row_background: 'theme:On
+          Background'}
     - name: UploadData_copy_copy
       properties: {text: Ga door naar dashboard., background: 'theme:Primary', foreground: 'theme:On
           Primary', icon_align: left, align: right, bold: false, tooltip: ''}
