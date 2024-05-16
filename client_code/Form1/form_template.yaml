@@ -8,16 +8,17 @@ components:
   name: Page1
   layout_properties: {slot: default}
   components:
+  - name: Label_Titel
+    properties: {text: 'Titel
+
+        '}
+    type: Label
+    layout_properties: {grid_position: 'KYQXQO,UKYNYU'}
   - name: DataContentPanel
     properties: {col_widths: '{}'}
     type: ColumnPanel
     layout_properties: {grid_position: 'IZJAWJ,WFSDPT'}
     components:
-    - name: ProdDataToggle
-      properties: {text: With production data}
-      type: CheckBox
-      layout_properties: {grid_position: 'QWHSGG,SCGGDF'}
-      event_bindings: {change: ProdDataToggle_change}
     - name: Consumption_Label
       properties: {text: Consumption data, bold: true, align: right}
       type: Label
@@ -31,6 +32,11 @@ components:
       properties: {text: '* .csv of .xlsx bestanden.', bold: false}
       type: Label
       layout_properties: {grid_position: 'CQZFNG,ODLNXP'}
+    - name: ProdDataToggle
+      properties: {text: With production data, align: center}
+      type: CheckBox
+      layout_properties: {grid_position: 'WWVQJU,OLRKSI'}
+      event_bindings: {change: ProdDataToggle_change}
     - name: ProductionContentPanel
       properties: {col_widths: '{}', visible: false}
       type: ColumnPanel
