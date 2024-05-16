@@ -122,7 +122,8 @@ class Form1(Form1Template):
     # Get the first and last entries of the dictionary plot_data_old
     first_date = plot_data[0]['Timestamp']
     last_date = plot_data[-1]['Timestamp']
-      
+
+    print(first_date, last_date)
     # Create a Plotly figure
     fig = go.Figure(data=[go.Scatter(
         x=[item['Timestamp'] for item in plot_data],
@@ -143,14 +144,12 @@ class Form1(Form1Template):
         xaxis=dict(
           tickformat='%Y-%m-%d %H',
           type='date',  # Ensure the x-axis is treated as date
-          #range=[0, 500],  # Set the initial zoom range
-          minallowed=first_date,
-          maxallowed=last_date
+          #minallowed=first_date,
+          #maxallowed=last_date
         ),
         yaxis=dict(
           autorange=True,  # Enable automatic scaling based on the data
-          constrain='domain',
-          constraintoward='center'
+          #minallowed=0 #doesn't work?
         )
     )
     
