@@ -20,10 +20,18 @@ def get_data(sheet_name='Electricity'):
   # Optionally, perform any data manipulation here if needed
   # For example, you might want to convert dates, fill NaNs, etc.
   df['Timestamp'] = df['Timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S.%f')
+  df['Timestamp'] = pd.to_datetime(df['Timestamp'])
+  # Set the timestamp column as the index
+  df.set_index('Timestamp', inplace=True)
   for i in range(len(df)):
     df["Unit"].iat[i] = df["Unit"].iat[0]
+   
+  # Resample the data to daily frequency
+  df_daily = df.resample('D').sum()
+  df_daily.reset_index(inplace=True)
+    
   # Return the DataFrame to the client
-  return df.to_dict('records')
+  return df_daily.to_dict('records')
 
 @anvil.server.callable
 def get_new_data(file):
@@ -38,6 +46,43 @@ def get_new_data(file):
     df["Unit"].iat[i] = df["Unit"].iat[0]
   # Return the DataFrame to the client
   return df.to_dict('records')
+
+@anvil.server.callable
+def generate_scatter_plot():
+    # Lees het CSV-bestand
+    file = data_files['gas_consumption_production.csv']
+    df = pd.read_csv(file)
+    #Ensure the 'Datetime' column is in datetime format
+    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    # Set the timestamp column as the index
+    df.set_index('timestamp', inplace=True)
+    # Bereken de verhouding productie/consumptie
+    df['Consumption/Production'] = df['consumption'] / df['production']
+    # Resample the data to daily frequency
+    df = df.resample('W').sum()
+    df.reset_index(inplace=True)
+    # Maak de scatterplot
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=df['production'],
+        y=df['consumption'],
+        mode='markers',
+        marker=dict(size=10,
+                    color=df['Consumption/Production'],  # Gebruik de ratio voor de kleur zet hier productie per consumptie unit
+                    showscale=True),  # Toon een kleurenschaal
+        text=df['timestamp'],  # Voeg datums toe als hover-text
+    ))
+    # Pas de layout aan
+    fig.update_layout(
+        title='Verhouding Productie/Consumptie',
+        xaxis_title='Productie',
+        yaxis_title='Gas Consumptie',
+        xaxis=dict(type='linear'),
+        yaxis=dict(type='linear')
+    )
+    # Converteer de figuur naar een dictionary
+    plot_dict = fig.to_dict()
+    return plot_dict
 
 @anvil.server.callable
 def render_chart_heatbar():

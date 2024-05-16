@@ -8,14 +8,8 @@ components:
   name: Page1
   layout_properties: {slot: default}
   components:
-  - name: Label_Titel
-    properties: {text: 'Titel
-
-        '}
-    type: Label
-    layout_properties: {grid_position: 'KYQXQO,UKYNYU'}
   - name: DataContentPanel
-    properties: {col_widths: '{}'}
+    properties: {col_widths: '{"TEMJPH":40,"GHXZWV":10,"MUWNTY":10}', col_spacing: tiny}
     type: ColumnPanel
     layout_properties: {grid_position: 'IZJAWJ,WFSDPT'}
     components:
@@ -55,23 +49,25 @@ components:
         properties: {text: '* .csv of .xlsx bestanden.', bold: false}
         type: Label
         layout_properties: {grid_position: 'FNLJUV,UQFYCJ'}
-    - name: ClearData
-      properties: {text: Clear Data, background: 'theme:Primary', foreground: 'theme:On
-          Primary', icon_align: left, align: right, bold: false, tooltip: ''}
-      type: Button
-      layout_properties: {grid_position: 'UXSJIN,VSZVLE'}
-      event_bindings: {click: ClearData_click}
-      data_bindings: []
     - name: spacer_1
       properties: {height: 32}
       type: Spacer
       layout_properties: {grid_position: 'UXSJIN,TEMJPH'}
     - name: UploadData_copy
-      properties: {text: Upload, background: 'theme:Primary', foreground: 'theme:On
-          Primary', icon_align: left, align: left, bold: false, tooltip: Upload your csv document here.}
+      properties: {text: Gain insights, background: 'theme:Primary', foreground: 'theme:On
+          Primary', icon_align: left, align: center, bold: false, tooltip: Upload your csv document here.,
+        icon: 'fa:line-chart'}
       type: Button
       layout_properties: {grid_position: 'UXSJIN,GHXZWV'}
       event_bindings: {click: TEMPUPLOAD}
+      data_bindings: []
+    - name: ClearData
+      properties: {align: center, tooltip: '', foreground: 'theme:On Primary', visible: false,
+        text: Clear Data, icon_align: left, background: 'theme:Secondary', bold: false,
+        icon: 'fa:trash'}
+      type: Button
+      layout_properties: {grid_position: 'UXSJIN,MUWNTY'}
+      event_bindings: {click: ClearData_click}
       data_bindings: []
   - name: VisualisatiePanel
     properties: {col_widths: '{}', visible: false}
@@ -86,6 +82,10 @@ components:
       properties: {}
       type: Plot
       layout_properties: {grid_position: 'CYUWJS,TQICPB'}
+    - name: plot_3
+      properties: {}
+      type: Plot
+      layout_properties: {grid_position: 'ZPDSMI,KCZFCD'}
     - name: iframe_chart_scatter
       properties: {}
       type: form:dep_3ik6lndklq0lfs:IFrame
@@ -105,10 +105,16 @@ components:
   properties: {}
   name: navbar_links
   layout_properties: {slot: nav-right}
-- name: ResetButton
-  properties: {align: left, tooltip: '', foreground: 'theme:On Primary', visible: false,
-    text: '', icon_align: top, background: 'theme:Primary', bold: false, icon: 'fa:bomb'}
-  type: Button
+  components:
+  - name: ResetButton
+    properties: {align: left, tooltip: '', foreground: 'theme:On Primary', visible: false,
+      text: '', icon_align: top, background: 'theme:Primary', bold: false, icon: 'fa:bomb'}
+    type: Button
+    event_bindings: {click: Resetpage}
+    data_bindings: []
+- name: Label_Titel
+  properties: {text: '3EM Frontend Title
+
+      '}
+  type: Label
   layout_properties: {slot: title}
-  event_bindings: {click: Resetpage}
-  data_bindings: []

@@ -11,7 +11,7 @@ components:
   layout_properties: {grid_position: 'BFGCRN,BLKDMY'}
   components:
   - name: Electriciteit_Panel
-    properties: {col_widths: '{"IDARCW":15,"BVZDZI":16}'}
+    properties: {col_widths: '{"IDARCW":15,"BVZDZI":18}'}
     type: ColumnPanel
     layout_properties: {grid_position: 'GXTYRJ,GNASCQ'}
     components:
@@ -48,7 +48,7 @@ components:
     type: Plot
     layout_properties: {grid_position: 'ZCJRAP,WMBEJQ'}
   - name: Gas_Panel
-    properties: {col_widths: '{"RQODCN":15,"ROCXRL":16}'}
+    properties: {col_widths: '{"RQODCN":20,"ROCXRL":25}'}
     type: ColumnPanel
     layout_properties: {grid_position: 'BKLXCE,PBWBPZ'}
     components:

@@ -13,11 +13,22 @@ class Form1(Form1Template):
     self.init_components(**properties)
       
     # Any code you write here will run before the form opens.
-    media = anvil.server.call('render_chart_scatter')
-    self.iframe_chart_scatter.url = media.get_url(True)
+    #media = anvil.server.call('render_chart_scatter')
+    #self.iframe_chart_scatter.url = media.get_url(True)
       
-    media = anvil.server.call('render_chart_heatbar')
-    self.iframe_chart_heatbar.url = media.get_url(True)
+    #media = anvil.server.call('render_chart_heatbar')
+    #self.iframe_chart_heatbar.url = media.get_url(True)
+
+    #Dit is een quick fix. We laden nu al de data in voordat de gebruiker op de "gain insight" knop druk.
+    #Deze functionaliteit hoor bij de submit_button_click()
+    gas_data = anvil.server.call('get_data', 'Gas')  
+    electricity_data = anvil.server.call('get_data', 'Electricity')  
+    self.configure_energy_plot(gas_data, self.plot_1, 'Gas','orange')
+    self.configure_energy_plot(electricity_data, self.plot_2, 'Electricity','blue')
+    # Roep de serverfunctie aan om de plot te genereren
+    plot_json = anvil.server.call('generate_scatter_plot')
+    # Zet de JSON-plot om in een Plotly-figuur en toon deze
+    self.plot_3.figure = plot_json
 
   def UploadData_Click(self, **event_args):
     if self.ProdDataToggle.checked and self.Consumption_FileLoader.file and self.Production_FileLoader.file:
@@ -70,6 +81,7 @@ class Form1(Form1Template):
     self.ConsumptionUploadlabel.text = self.Consumption_FileLoader.file.name
     self.ConsumptionUploadlabel.bold = False
     self.ConsumptionUploadlabel.foreground = 'theme:On Surface'
+    self.ClearData.visible = True
     pass
 
   #This method is called when a new file is loaer in to ProductionFileLoader
@@ -77,6 +89,7 @@ class Form1(Form1Template):
     self.ProductionUploadlabel.text = self.Production_FileLoader.file.name
     self.ProductionUploadlabel.bold = False
     self.ProductionUploadlabel.foreground = 'theme:On Surface'
+    self.ClearData.visible = True
     pass
 
   #This method is called when the ProdDataToggle checkbox is changed
@@ -93,13 +106,14 @@ class Form1(Form1Template):
     self.ProductionUploadlabel.text = '* .csv of .xlsx bestanden.'
     self.ConsumptionUploadlabel.text = '* .csv of .xlsx bestanden.'
     self.DefaultLabelState()
+    self.ClearData.visible = False
     pass
 
   def submit_button_click(self, **event_args):    
-    gas_data = anvil.server.call('get_data', 'Gas')  
-    electricity_data = anvil.server.call('get_data', 'Electricity')  
-    self.configure_energy_plot(gas_data, self.plot_1, 'Gas','orange')
-    self.configure_energy_plot(electricity_data, self.plot_2, 'Electricity','blue')
+    # gas_data = anvil.server.call('get_data', 'Gas')  
+    # electricity_data = anvil.server.call('get_data', 'Electricity')  
+    # self.configure_energy_plot(gas_data, self.plot_1, 'Gas','orange')
+    # self.configure_energy_plot(electricity_data, self.plot_2, 'Electricity','blue')
     self.DataContentPanel.visible = False
     self.VisualisatiePanel.visible = True
     self.ResetButton.visible = True
