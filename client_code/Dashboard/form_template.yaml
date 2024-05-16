@@ -1,7 +1,8 @@
 container: {type: ColumnPanel}
 components:
 - name: Toggle_Preformance
-  properties: {text: Energy Preformance, align: left, bold: true, icon: 'fa:caret-down'}
+  properties: {text: Energy Preformance, align: left, bold: true, icon: 'fa:caret-right',
+    enabled: true}
   type: Button
   layout_properties: {grid_position: 'RWPIAR,EARPXI'}
   event_bindings: {click: Toggle_Preformance_click}
