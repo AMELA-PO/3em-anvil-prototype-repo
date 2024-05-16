@@ -103,7 +103,7 @@ components:
       type: Label
       layout_properties: {grid_position: 'EAPZUV,ROCXRL JXLSMP,XNWCGW'}
     - name: Gas_Besparing_Waarde_copy
-      properties: {text: -0.22 %}
+      properties: {text: 37.62 %}
       type: Label
       layout_properties: {grid_position: 'EAPZUV,ROCXRL EQJLND,EEWJFB'}
 - name: Toggle_Financials
