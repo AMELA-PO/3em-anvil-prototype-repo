@@ -28,6 +28,12 @@ class Dashboard(DashboardTemplate):
         popup = Sustainability_options()
         popup.set_event_handler('x-close-popup', self.on_popup_close)
         alert(popup, large=True, dismissible=False)
+
+    def on_popup_close(self, **event_args):
+        print('should close')
+        if self.selected_option:
+            # Proceed with the main content
+            self.label_1.text = f"Selected option: {self.selected_option}"
         #Plot the data
         gas_data_old = anvil.server.call_s('get_data', 'Gas') 
         print('silent loading data')
@@ -37,11 +43,6 @@ class Dashboard(DashboardTemplate):
         self.configure_energy_plot(gas_data_old, gas_data_new, self.Plot_LineChart_Gas_Old_Nieuw, 'Gas', 'orange', 'green')
         self.configure_energy_plot(electricity_data_old, electricity_data_new, self.Plot_LineChart_Electricity_Old_Nieuw, 'Electricity', 'blue', 'orange')
 
-    def on_popup_close(self, **event_args):
-        print('should close')
-        if self.selected_option:
-            # Proceed with the main content
-            self.label_1.text = f"Selected option: {self.selected_option}"
     
     def Toggle_Preformance_click(self, **event_args):
         if self.Energy_Performance_Panel.visible:
@@ -118,7 +119,7 @@ class Dashboard(DashboardTemplate):
             self.outlined_2_label.visible = False
             self.outlined_2.visible = False
         if self.drop_down_kpi.selected_value == "IRR":
-            self.outlined_1.text = "10,72 %"
+            self.outlined_1.text = "10.72 %"
             self.outlined_1_label.visible = False
             self.outlined_2_label.visible = False
             self.outlined_2.visible = False

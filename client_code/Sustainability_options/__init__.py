@@ -12,8 +12,8 @@ class Sustainability_options(Sustainability_optionsTemplate):
         self.init_components(**properties)
         self.Sustainability_Dropdown.items = [
             ("Electric heating", "electric_heating"),
-            ("Electric heating + solar panel", "electric_heating_solar"),
-            ("Electric heating + solar panel + battery storage", "electric_heating_solar_battery")
+            ("Electric heating + solar panel", "electric_heating_solarpv"),
+            ("Electric heating + solar panel + battery storage", "electric_heating_solarpv_battery")
         ]
 
     def Proceed_Button_click(self, **event_args):
