@@ -85,7 +85,7 @@ components:
       type: form:dep_3ik6lndklq0lfs:IFrame
       layout_properties: {grid_position: 'NOXJVH,WBMESB'}
     - name: iframe_chart_heatbar
-      properties: {height: '680'}
+      properties: {height: '650'}
       type: form:dep_3ik6lndklq0lfs:IFrame
       layout_properties: {grid_position: 'AZSCKT,IUGCHD', full_width_row: false, row_background: 'theme:On
           Background'}

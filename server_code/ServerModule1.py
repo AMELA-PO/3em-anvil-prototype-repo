@@ -42,7 +42,8 @@ def get_new_data(file):
 @anvil.server.callable
 def render_chart_heatbar():
     df = load_data_prodcon()
-
+    alt.renderers.set_embed_options(actions=False)
+    
     brush = alt.selection_interval(encodings=['x'])
 
     base = alt.Chart(df).mark_bar().encode(
