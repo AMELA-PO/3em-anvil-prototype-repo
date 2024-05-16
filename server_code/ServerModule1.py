@@ -25,11 +25,9 @@ def get_data(sheet_name='Electricity'):
   df.set_index('Timestamp', inplace=True)
   for i in range(len(df)):
     df["Unit"].iat[i] = df["Unit"].iat[0]
-   
   # Resample the data to daily frequency
   df_daily = df.resample('D').sum()
   df_daily.reset_index(inplace=True)
-    
   # Return the DataFrame to the client
   return df_daily.to_dict('records')
 
@@ -42,10 +40,16 @@ def get_new_data(file):
   # Optionally, perform any data manipulation here if needed
   # For example, you might want to convert dates, fill NaNs, etc.
   df['Timestamp'] = df['Timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S.%f')
+  df['Timestamp'] = pd.to_datetime(df['Timestamp'])
+  # Set the timestamp column as the index
+  df.set_index('Timestamp', inplace=True)
   for i in range(len(df)):
     df["Unit"].iat[i] = df["Unit"].iat[0]
+  # Resample the data to daily frequency
+  df_daily = df.resample('D').sum()
+  df_daily.reset_index(inplace=True)
   # Return the DataFrame to the client
-  return df.to_dict('records')
+  return df_daily.to_dict('records')
 
 @anvil.server.callable
 def generate_scatter_plot():
@@ -69,14 +73,21 @@ def generate_scatter_plot():
         mode='markers',
         marker=dict(size=10,
                     color=df['Consumption/Production'],  # Gebruik de ratio voor de kleur zet hier productie per consumptie unit
-                    showscale=True),  # Toon een kleurenschaal
+                    showscale=True,
+                    colorbar=dict(
+                        title=dict(
+                            text='Production per Consumption Unit',  # Titel van de kleurenschaal
+                            side='top'  # Locatie van de titel
+                        )
+                    )),  # Toon een kleurenschaal
         text=df['timestamp'],  # Voeg datums toe als hover-text
+        hovertemplate='Production: %{x}<br>Consumption: %{y}<br>Timestamp: %{text}<extra></extra>',
     ))
     # Pas de layout aan
     fig.update_layout(
-        title='Verhouding Productie/Consumptie',
-        xaxis_title='Productie',
-        yaxis_title='Gas Consumptie',
+        title='Production/Consumption rate on weekly basis.',
+        xaxis_title='Production',
+        yaxis_title='Gas Consumption',
         xaxis=dict(type='linear'),
         yaxis=dict(type='linear')
     )
