@@ -1,5 +1,5 @@
 from ._anvil_designer import DashboardTemplate
-from .s
+from ..Sustainability_options import Sustainability_options
 from anvil import *
 import anvil.server
 import anvil.tables as tables
@@ -12,6 +12,8 @@ class Dashboard(DashboardTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
+        self.selected_option = None
+        self.show_popup()
         
         self.drop_down_kpi.selected_value = self.drop_down_kpi.placeholder
 
@@ -20,6 +22,12 @@ class Dashboard(DashboardTemplate):
         self.Financial_Performance_Panel.visible = True
         self.Toggle_Financials.icon = "fa:caret-down"
         # Any code you write here will run before the form opens.
+        
+
+    def show_popup(self):
+        popup = Sustainability_options()
+        popup.set_event_handler('x-close-popup', self.on_popup_close)
+        alert(popup, large=True, dismissible=False)
         #Plot the data
         gas_data_old = anvil.server.call_s('get_data', 'Gas')  
         electricity_data_old = anvil.server.call_s('get_data', 'Electricity')  
@@ -27,6 +35,11 @@ class Dashboard(DashboardTemplate):
         electricity_data_new = anvil.server.call_s('get_new_data', 'salestool_electricity_consumption_new.xlsx') 
         self.configure_energy_plot(gas_data_old, gas_data_new, self.Plot_LineChart_Gas_Old_Nieuw, 'Gas', 'orange', 'green')
         self.configure_energy_plot(electricity_data_old, electricity_data_new, self.Plot_LineChart_Electricity_Old_Nieuw, 'Electricity', 'blue', 'orange')
+
+    def on_popup_close(self, **event_args):
+        if self.selected_option:
+            # Proceed with the main content
+            self.label_1.text = f"Selected option: {self.selected_option}"
     
     def Toggle_Preformance_click(self, **event_args):
         if self.Energy_Performance_Panel.visible:

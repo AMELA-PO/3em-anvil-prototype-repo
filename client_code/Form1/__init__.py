@@ -140,8 +140,6 @@ class Form1(Form1Template):
           tickformat='%Y-%m-%d %H',
           type='date',  # Ensure the x-axis is treated as date
           #range=[0, 500],  # Set the initial zoom range
-          constrain='domain',
-          constraintoward='center'
         ),
         yaxis=dict(
           autorange=True,  # Enable automatic scaling based on the data
@@ -159,7 +157,7 @@ class Form1(Form1Template):
     self.ResetButton.visible = False
 
   def GotoDashboard(self, **event_args):
-      open_form('Sustainability_options')
+      open_form('Dashboard')
       pass
 
   

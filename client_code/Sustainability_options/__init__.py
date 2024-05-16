@@ -17,5 +17,8 @@ class Sustainability_options(Sustainability_optionsTemplate):
         ]
 
     def Proceed_Button_click(self, **event_args):
-        #selected_option = self.Sustainability_Dropdown.selected_value
-        open_form('Dashboard')
+        selected_option = self.dropdown_1.selected_value
+        if selected_option:
+            # Store the selected option or pass it to the main form
+            get_open_form().selected_option = selected_option
+            self.raise_event('x-close-popup')
