@@ -29,7 +29,8 @@ class Dashboard(DashboardTemplate):
         popup.set_event_handler('x-close-popup', self.on_popup_close)
         alert(popup, large=True, dismissible=False)
         #Plot the data
-        gas_data_old = anvil.server.call_s('get_data', 'Gas')  
+        gas_data_old = anvil.server.call_s('get_data', 'Gas') 
+        print('silent loading data')
         electricity_data_old = anvil.server.call_s('get_data', 'Electricity')  
         gas_data_new = anvil.server.call_s('get_new_data', 'salestool_gas_consumption_new.xlsx')  
         electricity_data_new = anvil.server.call_s('get_new_data', 'salestool_electricity_consumption_new.xlsx') 
@@ -37,6 +38,7 @@ class Dashboard(DashboardTemplate):
         self.configure_energy_plot(electricity_data_old, electricity_data_new, self.Plot_LineChart_Electricity_Old_Nieuw, 'Electricity', 'blue', 'orange')
 
     def on_popup_close(self, **event_args):
+        print('should close')
         if self.selected_option:
             # Proceed with the main content
             self.label_1.text = f"Selected option: {self.selected_option}"

@@ -86,19 +86,15 @@ components:
       properties: {}
       type: Plot
       layout_properties: {grid_position: 'ZPDSMI,KCZFCD'}
-    - name: iframe_chart_scatter
+    - name: plot_4
       properties: {}
-      type: form:dep_3ik6lndklq0lfs:IFrame
-      layout_properties: {grid_position: 'NOXJVH,WBMESB'}
-    - name: iframe_chart_heatbar
-      properties: {}
-      type: form:dep_3ik6lndklq0lfs:IFrame
-      layout_properties: {grid_position: 'AZSCKT,IUGCHD', full_width_row: false}
+      type: Plot
+      layout_properties: {grid_position: 'YPAYWH,ZRZVOV'}
     - name: UploadData_copy_copy
       properties: {text: Ga door naar dashboard., background: 'theme:Primary', foreground: 'theme:On
           Primary', icon_align: left, align: right, bold: false, tooltip: ''}
       type: Button
-      layout_properties: {grid_position: 'EDSWLV,RCONFQ'}
+      layout_properties: {grid_position: 'BJPKMC,SWXZMW'}
       event_bindings: {click: GotoDashboard}
       data_bindings: []
 - type: FlowPanel

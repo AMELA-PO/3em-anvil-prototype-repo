@@ -26,9 +26,10 @@ class Form1(Form1Template):
     self.configure_energy_plot(gas_data, self.plot_1, 'Gas','orange')
     self.configure_energy_plot(electricity_data, self.plot_2, 'Electricity','blue')
     # Roep de serverfunctie aan om de plot te genereren
-    plot_json = anvil.server.call('generate_scatter_plot')
+    plot_json = anvil.server.call('get_plot_data')
     # Zet de JSON-plot om in een Plotly-figuur en toon deze
-    self.plot_3.figure = plot_json
+    self.plot_3.figure, self.plot_4.figure = plot_json
+      
 
   def UploadData_Click(self, **event_args):
     if self.ProdDataToggle.checked and self.Consumption_FileLoader.file and self.Production_FileLoader.file:
