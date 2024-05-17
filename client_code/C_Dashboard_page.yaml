@@ -2,22 +2,6 @@ container:
   type: ColumnPanel
   properties: {visible: true}
 components:
-- name: navbar_links_copy
-  properties: {align: right}
-  type: FlowPanel
-  layout_properties: {grid_position: 'NOKFJU,ARBQAY'}
-  components:
-  - name: ResetButton
-    properties: {align: right, tooltip: '', foreground: 'theme:On Primary', visible: true,
-      text: '', icon_align: top, background: 'theme:Primary', bold: false, icon: 'fa:backward'}
-    type: Button
-    event_bindings: {click: Resetpage}
-  - name: ResetButton_copy_copy
-    properties: {align: right, tooltip: '', foreground: 'theme:On Primary', visible: true,
-      text: '', icon_align: top, background: 'theme:Primary', bold: false, icon: 'fa:home'}
-    type: Button
-    layout_properties: {}
-    event_bindings: {click: Resetpage}
 - name: Toggle_Preformance
   properties: {text: Energy Preformance, align: left, bold: true, icon: 'fa:caret-right',
     enabled: true}
@@ -214,5 +198,5 @@ components:
     properties: {visible: false}
     type: Label
     layout_properties: {grid_position: ',GBFYMY WNWSEU,RVJAYJ'}
-is_package: true
+is_package: false
 custom_component: false
