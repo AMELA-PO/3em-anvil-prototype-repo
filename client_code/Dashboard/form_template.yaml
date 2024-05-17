@@ -147,7 +147,7 @@ components:
   - name: drop_down_kpi
     properties:
       placeholder: KPI
-      items: [CAPEX, OPEX, TCO, IRR, ROI, Terugverdientijd]
+      items: [CAPEX, OPEX, TCO, IRR, ROI]
       include_placeholder: false
     type: DropDown
     layout_properties: {grid_position: ',undefined'}

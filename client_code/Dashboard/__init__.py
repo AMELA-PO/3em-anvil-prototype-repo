@@ -7,7 +7,6 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import plotly.graph_objects as go
 
-
 class Dashboard(DashboardTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
@@ -22,8 +21,7 @@ class Dashboard(DashboardTemplate):
         self.Financial_Performance_Panel.visible = True
         self.Toggle_Financials.icon = "fa:caret-down"
         # Any code you write here will run before the form opens.
-        
-
+    
     def show_popup(self):
         popup = Sustainability_options()
         popup.set_event_handler('x-close-popup', self.on_popup_close)
@@ -124,13 +122,13 @@ class Dashboard(DashboardTemplate):
             self.outlined_2_label.visible = False
             self.outlined_2.visible = False
         if self.drop_down_kpi.selected_value == "ROI":
-            self.outlined_1.text = "20 %"
-            self.outlined_1_label.visible = False
-            self.outlined_2_label.visible = False
-            self.outlined_2.visible = False
-        if self.drop_down_kpi.selected_value == "Terugverdientijd":
             self.outlined_1.text = "15 Years"
             self.outlined_1_label.visible = False
             self.outlined_2_label.visible = False
             self.outlined_2.visible = False
+        # if self.drop_down_kpi.selected_value == "Terugverdientijd":
+        #     self.outlined_1.text = "15 Years"
+        #     self.outlined_1_label.visible = False
+        #     self.outlined_2_label.visible = False
+        #     self.outlined_2.visible = False
         pass

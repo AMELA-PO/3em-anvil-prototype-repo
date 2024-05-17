@@ -85,7 +85,7 @@ def gen_scatterplot(dataframe):
                     showscale=True,
                     colorbar=dict(
                         title=dict(
-                            text='Production per Consumption Unit',  # Titel van de kleurenschaal
+                            text='Energy consumptie per unit production',  # Titel van de kleurenschaal
                             side='top'  # Locatie van de titel
                         )
                     )),  # Toon een kleurenschaal
@@ -110,7 +110,16 @@ def gen_bar_plot(dataframe):
              color_continuous_scale='aggrnyl', hover_name='timestamp')
  
     # Update layout to set bargap to 0 and y-axis minimum value to 0
-    fig.update_layout(bargap=0, yaxis=dict(minallowed=0))
+    fig.update_layout(
+        xaxis_title='Timestamp',
+        yaxis_title='Production',
+        bargap=0, 
+        yaxis=dict(minallowed=0),
+        coloraxis_colorbar=dict(
+            title=dict(
+            text='Energy consumption'
+        )
+    ))
     
     plot_dict1 = fig.to_dict()
     return plot_dict1
