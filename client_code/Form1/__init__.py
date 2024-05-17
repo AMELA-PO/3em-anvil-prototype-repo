@@ -52,7 +52,7 @@ class Form1(Form1Template):
     #              ("Stop", "Doe niks")
     #            ])
     # print(f"The user chose {result}")
-    #anvil.server.call('getData', self.Consumption_FileLoader.file)
+    #anvil.server.call('getData', self.Consumption_FileLoader.file) 
     anvil.server.call('emit_server_ip', self.Consumption_FileLoader.file)
 
   def ErrorNoConsumptionData(self):
