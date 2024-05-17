@@ -1,5 +1,5 @@
-from ._anvil_designer import DashboardTemplate
-from ..Sustainability_options import Sustainability_options
+from ._anvil_designer import C_Dashboard_pageTemplate
+from ..B_SES_config_page import B_SES_config_page
 from anvil import *
 import anvil.server
 import anvil.tables as tables
@@ -7,7 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import plotly.graph_objects as go
 
-class Dashboard(DashboardTemplate):
+class C_Dashboard_page(C_Dashboard_pageTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
@@ -23,7 +23,7 @@ class Dashboard(DashboardTemplate):
         # Any code you write here will run before the form opens.
     
     def show_popup(self):
-        popup = Sustainability_options()
+        popup = B_SES_config_page()
         popup.set_event_handler('x-close-popup', self.on_popup_close)
         alert(popup, large=True, dismissible=False)
 

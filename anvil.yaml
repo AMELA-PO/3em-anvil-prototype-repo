@@ -9,6 +9,7 @@ services:
 - source: /runtime/services/anvil/files.yml
   client_config: {}
   server_config: {file_table: files}
+startup: {type: form, module: C_Dashboard_page}
 package_name: '[3EM]_Frontend'
 allow_embedding: false
 name: '[3EM] Frontend'
@@ -17,7 +18,7 @@ runtime_options:
   client_version: '3'
   server_version: python3-full
   server_spec: {base: python310-minimal}
-startup_form: Form1
+startup_form: null
 db_schema:
   files:
     client: none

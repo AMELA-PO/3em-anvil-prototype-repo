@@ -1,4 +1,4 @@
-from ._anvil_designer import Form1Template
+from ._anvil_designer import A_Upload_data_pageTemplate
 from anvil import *
 import plotly.graph_objects as go
 import anvil.server
@@ -7,7 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-class Form1(Form1Template):  
+class A_Upload_data_page(A_Upload_data_pageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
