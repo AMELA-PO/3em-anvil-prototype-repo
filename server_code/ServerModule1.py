@@ -7,6 +7,7 @@ from anvil.files import data_files
 
 from datetime import datetime
 from plotly import graph_objects as go
+from plotly import express as px
 import pandas as pd
 import altair as alt
 
@@ -20,10 +21,16 @@ def get_data(sheet_name='Electricity'):
   # Optionally, perform any data manipulation here if needed
   # For example, you might want to convert dates, fill NaNs, etc.
   df['Timestamp'] = df['Timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S.%f')
+  df['Timestamp'] = pd.to_datetime(df['Timestamp'])
+  # Set the timestamp column as the index
+  df.set_index('Timestamp', inplace=True)
   for i in range(len(df)):
     df["Unit"].iat[i] = df["Unit"].iat[0]
+  # Resample the data to daily frequency
+  df_daily = df.resample('D').sum()
+  df_daily.reset_index(inplace=True)
   # Return the DataFrame to the client
-  return df.to_dict('records')
+  return df_daily.to_dict('records')
 
 @anvil.server.callable
 def get_new_data(file):
@@ -34,10 +41,88 @@ def get_new_data(file):
   # Optionally, perform any data manipulation here if needed
   # For example, you might want to convert dates, fill NaNs, etc.
   df['Timestamp'] = df['Timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S.%f')
+  df['Timestamp'] = pd.to_datetime(df['Timestamp'])
+  # Set the timestamp column as the index
+  df.set_index('Timestamp', inplace=True)
   for i in range(len(df)):
     df["Unit"].iat[i] = df["Unit"].iat[0]
+  # Resample the data to daily frequency
+  df_daily = df.resample('D').sum()
+  df_daily.reset_index(inplace=True)
   # Return the DataFrame to the client
-  return df.to_dict('records')
+  return df_daily.to_dict('records')
+
+@anvil.server.callable
+def get_plot_data():
+    # Lees het CSV-bestand
+    file = data_files['gas_consumption_production.csv']
+    df = pd.read_csv(file)
+    #Ensure the 'Datetime' column is in datetime format
+    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    # Set the timestamp column as the index
+    df.set_index('timestamp', inplace=True)
+    # Bereken de verhouding productie/consumptie
+    df['Consumption/Production'] = df['consumption'] / df['production']
+    # Resample the data to daily frequency
+    df = df.resample('W').sum()
+    df.reset_index(inplace=True)
+    scatter = gen_scatterplot(df)
+    bar = gen_bar_plot(df)
+    return scatter, bar
+
+@anvil.server.callable
+def gen_scatterplot(dataframe):
+    df = dataframe
+    # Maak de scatterplot
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=df['production'],
+        y=df['consumption'],
+        mode='markers',
+        marker=dict(size=10,
+                    color=df['Consumption/Production'],# Gebruik de ratio voor de kleur zet hier productie per consumptie unit
+                    colorscale='aggrnyl',
+                    showscale=True,
+                    colorbar=dict(
+                        title=dict(
+                            text='Energy consumptie per unit production',  # Titel van de kleurenschaal
+                            side='top'  # Locatie van de titel
+                        )
+                    )),  # Toon een kleurenschaal
+        text=df['timestamp'],  # Voeg datums toe als hover-text
+        hovertemplate='Production: %{x}<br>Consumption: %{y}<br>Timestamp: %{text}<extra></extra>',
+    ))
+    # Pas de layout aan
+    fig.update_layout(
+        title='Production/Consumption rate on weekly basis.',
+        xaxis_title='Production',
+        yaxis_title='Gas Consumption',
+        xaxis=dict(type='linear'),
+        yaxis=dict(type='linear')
+    )
+    # Converteer de figuur naar een dictionary
+    plot_dict1 = fig.to_dict()
+    return plot_dict1
+
+@anvil.server.callable
+def gen_bar_plot(dataframe):
+    fig = px.bar(dataframe, x='timestamp', y='production', color='consumption',
+             color_continuous_scale='aggrnyl', hover_name='timestamp')
+ 
+    # Update layout to set bargap to 0 and y-axis minimum value to 0
+    fig.update_layout(
+        xaxis_title='Timestamp',
+        yaxis_title='Production',
+        bargap=0, 
+        yaxis=dict(minallowed=0),
+        coloraxis_colorbar=dict(
+            title=dict(
+            text='Energy consumption'
+        )
+    ))
+    
+    plot_dict1 = fig.to_dict()
+    return plot_dict1
 
 @anvil.server.callable
 def render_chart_heatbar():

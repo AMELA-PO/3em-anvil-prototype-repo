@@ -5,96 +5,107 @@ container:
 components:
 - type: ColumnPanel
   properties: {col_widths: '{}'}
-  name: Page1
   layout_properties: {slot: default}
+  name: Page1
   components:
-  - name: DataContentPanel
-    properties: {col_widths: '{}'}
+  - properties: {col_widths: '{"TEMJPH":40,"GHXZWV":10,"MUWNTY":10}', col_spacing: tiny}
     type: ColumnPanel
     layout_properties: {grid_position: 'IZJAWJ,WFSDPT'}
+    name: DataContentPanel
     components:
-    - name: ProdDataToggle
-      properties: {text: With production data}
-      type: CheckBox
-      layout_properties: {grid_position: 'QWHSGG,SCGGDF'}
-      event_bindings: {change: ProdDataToggle_change}
-    - name: Consumption_Label
-      properties: {text: Consumption data, bold: true, align: right}
+    - properties: {text: Consumption data, bold: true, align: right}
       type: Label
       layout_properties: {grid_position: 'CQZFNG,OYGGLH'}
-    - name: Consumption_FileLoader
-      properties: {text: Add file, file_types: '.csv,.xlsx', align: left}
+      name: Consumption_Label
+    - properties: {text: Add file, file_types: '.csv,.xlsx', align: left}
       type: FileLoader
       layout_properties: {grid_position: 'CQZFNG,HIBUQP'}
       event_bindings: {change: Consumption_FileLoader_change}
-    - name: ConsumptionUploadlabel
-      properties: {text: '* .csv of .xlsx bestanden.', bold: false}
+      name: Consumption_FileLoader
+    - properties: {text: '* .csv of .xlsx bestanden.', bold: false}
       type: Label
       layout_properties: {grid_position: 'CQZFNG,ODLNXP'}
-    - name: ProductionContentPanel
-      properties: {col_widths: '{}', visible: false}
+      name: ConsumptionUploadlabel
+    - properties: {text: With production data, align: center}
+      type: CheckBox
+      layout_properties: {grid_position: 'WWVQJU,OLRKSI'}
+      event_bindings: {change: ProdDataToggle_change}
+      name: ProdDataToggle
+    - properties: {col_widths: '{}', visible: false}
       type: ColumnPanel
       layout_properties: {grid_position: 'JPHCCL,EMPZSU'}
+      name: ProductionContentPanel
       components:
-      - name: Production_Label
-        properties: {text: Production data, bold: true, align: right}
+      - properties: {text: Production data, bold: true, align: right}
         type: Label
         layout_properties: {grid_position: 'FNLJUV,YIDIXR'}
-      - name: Production_FileLoader
-        properties: {text: Add file, file_types: '.csv,.xlsx', align: left}
+        name: Production_Label
+      - properties: {text: Add file, file_types: '.csv,.xlsx', align: left}
         type: FileLoader
         layout_properties: {grid_position: 'FNLJUV,EFWGKE'}
         event_bindings: {change: Production_FileLoader_change}
-      - name: ProductionUploadlabel
-        properties: {text: '* .csv of .xlsx bestanden.', bold: false}
+        name: Production_FileLoader
+      - properties: {text: '* .csv of .xlsx bestanden.', bold: false}
         type: Label
         layout_properties: {grid_position: 'FNLJUV,UQFYCJ'}
-    - name: ClearData
-      properties: {text: Clear Data, background: 'theme:Primary', foreground: 'theme:On
-          Primary', icon_align: left, align: right, bold: false, tooltip: ''}
-      type: Button
-      layout_properties: {grid_position: 'UXSJIN,VSZVLE'}
-      event_bindings: {click: ClearData_click}
-      data_bindings: []
-    - name: spacer_1
-      properties: {height: 32}
+        name: ProductionUploadlabel
+    - properties: {height: 32}
       type: Spacer
       layout_properties: {grid_position: 'UXSJIN,TEMJPH'}
-    - name: UploadData_copy
-      properties: {text: Upload, background: 'theme:Primary', foreground: 'theme:On
-          Primary', icon_align: left, align: left, bold: false, tooltip: Upload your csv document here.}
+      name: spacer_1
+    - properties: {text: Gain insights, background: 'theme:Primary', foreground: 'theme:On
+          Primary', icon_align: left, align: center, bold: false, tooltip: Upload your csv document here.,
+        icon: 'fa:line-chart'}
       type: Button
       layout_properties: {grid_position: 'UXSJIN,GHXZWV'}
       event_bindings: {click: TEMPUPLOAD}
-      data_bindings: []
-  - name: VisualisatiePanel
-    properties: {col_widths: '{}', visible: false}
+      name: UploadData_copy
+    - properties: {align: center, tooltip: '', foreground: 'theme:On Primary', visible: false,
+        text: Clear Data, icon_align: left, background: 'theme:Secondary', bold: false,
+        icon: 'fa:trash'}
+      type: Button
+      layout_properties: {grid_position: 'UXSJIN,MUWNTY'}
+      event_bindings: {click: ClearData_click}
+      name: ClearData
+  - properties: {col_widths: '{}', visible: false}
     type: ColumnPanel
     layout_properties: {grid_position: 'UINPJX,QBFXYL'}
+    name: VisualisatiePanel
     components:
-    - name: plot_1
-      properties: {}
+    - properties: {}
       type: Plot
       layout_properties: {grid_position: 'ZEAWZJ,LZKYCF'}
-    - name: plot_2
-      properties: {}
+      name: plot_1
+    - properties: {}
       type: Plot
       layout_properties: {grid_position: 'CYUWJS,TQICPB'}
-    - name: UploadData_copy_copy
-      properties: {text: Ga door naar dashboard., background: 'theme:Primary', foreground: 'theme:On
+      name: plot_2
+    - properties: {}
+      type: Plot
+      layout_properties: {grid_position: 'ZPDSMI,KCZFCD'}
+      name: plot_3
+    - properties: {}
+      type: Plot
+      layout_properties: {grid_position: 'YPAYWH,ZRZVOV'}
+      name: plot_4
+    - properties: {text: Go to investment options, background: 'theme:Primary', foreground: 'theme:On
           Primary', icon_align: left, align: right, bold: false, tooltip: ''}
       type: Button
-      layout_properties: {grid_position: 'EDSWLV,RCONFQ'}
+      layout_properties: {grid_position: 'BJPKMC,SWXZMW'}
       event_bindings: {click: GotoDashboard}
-      data_bindings: []
+      name: UploadData_copy_copy
 - type: FlowPanel
   properties: {}
-  name: navbar_links
   layout_properties: {slot: nav-right}
-- name: ResetButton
-  properties: {align: left, tooltip: '', foreground: 'theme:On Primary', visible: false,
-    text: '', icon_align: top, background: 'theme:Primary', bold: false, icon: 'fa:bomb'}
-  type: Button
+  name: navbar_links
+  components:
+  - properties: {align: left, tooltip: '', foreground: 'theme:On Primary', visible: false,
+      text: '', icon_align: top, background: 'theme:Primary', bold: false, icon: 'fa:home'}
+    type: Button
+    layout_properties: {}
+    event_bindings: {click: Resetpage}
+    name: ResetButton
+- properties: {text: Energy consumption insights}
+  type: Label
   layout_properties: {slot: title}
-  event_bindings: {click: Resetpage}
-  data_bindings: []
+  name: Label_Titel

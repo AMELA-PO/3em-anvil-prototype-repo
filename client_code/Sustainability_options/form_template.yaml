@@ -1,0 +1,29 @@
+is_package: true
+container:
+  type: HtmlTemplate
+  properties: {html: '@theme:standard-page.html'}
+components:
+- type: ColumnPanel
+  properties: {}
+  name: content_panel
+  layout_properties: {slot: default}
+  components:
+  - name: Title_Label
+    properties: {text: 'Choose energy sustainability options:', bold: true, font: '',
+      font_size: 20}
+    type: Label
+    layout_properties: {grid_position: 'FFAETO,RBPFWY'}
+  - name: Sustainability_Dropdown
+    properties: {align: full, placeholder: <Ustainability option>, include_placeholder: true}
+    type: DropDown
+    layout_properties: {grid_position: 'VGVHXM,DCBTHI'}
+  - name: Proceed_Button
+    properties: {text: Proceed to dashboard, background: 'theme:Primary', foreground: 'theme:On
+        Primary', role: null, align: right, bold: false}
+    type: Button
+    layout_properties: {grid_position: 'DINTOP,CPXJYN'}
+    event_bindings: {click: Proceed_Button_click}
+- type: FlowPanel
+  properties: {}
+  name: navbar_links
+  layout_properties: {slot: nav-right}

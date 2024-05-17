@@ -1,7 +1,8 @@
 container: {type: ColumnPanel}
 components:
 - name: Toggle_Preformance
-  properties: {text: Energy Preformance, align: left, bold: true, icon: 'fa:caret-down'}
+  properties: {text: Energy Preformance, align: left, bold: true, icon: 'fa:caret-right',
+    enabled: true}
   type: Button
   layout_properties: {grid_position: 'RWPIAR,EARPXI'}
   event_bindings: {click: Toggle_Preformance_click}
@@ -11,14 +12,14 @@ components:
   layout_properties: {grid_position: 'BFGCRN,BLKDMY'}
   components:
   - name: Electriciteit_Panel
-    properties: {col_widths: '{"IDARCW":15,"BVZDZI":16}'}
+    properties: {col_widths: '{"IDARCW":16,"BVZDZI":9}'}
     type: ColumnPanel
     layout_properties: {grid_position: 'GXTYRJ,GNASCQ'}
     components:
     - name: Plot_LineChart_Electricity_Old_Nieuw
-      properties: {height: 279.3125}
+      properties: {height: '430'}
       type: Plot
-      layout_properties: {grid_position: 'SIQUSB,NVHEMF'}
+      layout_properties: {grid_position: 'GRPPQQ,UUHVTB'}
     - name: Label_Electricteit_Voor
       properties: {text: 'Total electricity consumption before:'}
       type: Label
@@ -31,24 +32,24 @@ components:
       properties: {text: 'Savings:'}
       type: Label
       layout_properties: {grid_position: 'CXBDOV,IDARCW VPRUYC,GHALOV'}
-    - name: Electriciteit_Voor_Waarde
+    - name: total_electricity_cons
       properties: {text: 972.98 MWh}
       type: Label
       layout_properties: {grid_position: 'CXBDOV,BVZDZI YQEDUB,ZZLNXO'}
-    - name: Electriciteit_Na_Waarde
-      properties: {text: 2998.73 MWh}
+    - name: total_electricity_cons_new
+      properties: {text: 2193.73 MWh}
       type: Label
       layout_properties: {grid_position: 'CXBDOV,BVZDZI HADITC,OGJBRZ'}
-    - name: Electriciteit_Besparing_Waarde
-      properties: {text: -208.20 %}
+    - name: electricity_savings_percentage
+      properties: {text: -125.40 %}
       type: Label
       layout_properties: {grid_position: 'CXBDOV,BVZDZI WJALVH,LONVCI'}
   - name: Plot_LineChart_Gas_Old_Nieuw
-    properties: {height: 299.546875}
+    properties: {height: '430'}
     type: Plot
     layout_properties: {grid_position: 'ZCJRAP,WMBEJQ'}
   - name: Gas_Panel
-    properties: {col_widths: '{"RQODCN":15,"ROCXRL":16}'}
+    properties: {col_widths: '{"RQODCN":20,"ROCXRL":25}'}
     type: ColumnPanel
     layout_properties: {grid_position: 'BKLXCE,PBWBPZ'}
     components:
@@ -64,15 +65,15 @@ components:
       properties: {text: 'Savings:'}
       type: Label
       layout_properties: {grid_position: 'EAPZUV,RQODCN AJNRIZ,WEATUA'}
-    - name: Gas_Voor_Waarde
+    - name: total_gas_cons
       properties: {text: 650476.89 m3}
       type: Label
       layout_properties: {grid_position: 'EAPZUV,ROCXRL UYFHNV,WLZHAI'}
-    - name: Gas_Na_Waarde
+    - name: total_gas_cons_new
       properties: {text: 450933.17 m3}
       type: Label
       layout_properties: {grid_position: 'EAPZUV,ROCXRL JXLSMP,XNWCGW'}
-    - name: Gas_Besparing_Waarde
+    - name: gas_savings_percentage
       properties: {text: 30.68 %}
       type: Label
       layout_properties: {grid_position: 'EAPZUV,ROCXRL EQJLND,EEWJFB'}
@@ -93,16 +94,16 @@ components:
       properties: {text: 'Savings:'}
       type: Label
       layout_properties: {grid_position: 'EAPZUV,RQODCN AJNRIZ,WEATUA'}
-    - name: Emission_Value_Before
+    - name: total_co2
       properties: {text: 1557.72 tCO2}
       type: Label
       layout_properties: {grid_position: 'EAPZUV,ROCXRL UYFHNV,WLZHAI'}
-    - name: Emission_Value_After
-      properties: {text: 1561.14 tCO2}
+    - name: total_co2_new
+      properties: {text: 1394.14 tCO2}
       type: Label
       layout_properties: {grid_position: 'EAPZUV,ROCXRL JXLSMP,XNWCGW'}
-    - name: Gas_Besparing_Waarde_copy
-      properties: {text: -0.22 %}
+    - name: co2_savings_percentage
+      properties: {text: 10.94 %}
       type: Label
       layout_properties: {grid_position: 'EAPZUV,ROCXRL EQJLND,EEWJFB'}
 - name: Toggle_Financials
@@ -131,22 +132,22 @@ components:
     properties: {text: Choose KPI}
     type: Label
     layout_properties: {grid_position: 'CMAFEC,KPASBN DMSMKJ,POQPLV'}
-  - name: Total_Energy_Cost_Old_Value
-    properties: {text: '€ 486.487,68'}
+  - name: total_energy_cost
+    properties: {text: € 486.487}
     type: Label
     layout_properties: {grid_position: 'CMAFEC,ZYMTGZ EIOTJQ,PMLTLG'}
-  - name: Total_Energy_Cost_New_Value
-    properties: {text: '€ 486.487,67'}
+  - name: total_energy_cost_new
+    properties: {text: € 1.096.541}
     type: Label
     layout_properties: {grid_position: 'CMAFEC,ZYMTGZ NDJKEM,WTWRBA'}
-  - name: Total_Energy_Cost_Saving_Value
-    properties: {text: 0.0 %}
+  - name: energy_cost_savings_percentage
+    properties: {text: -125.40 %}
     type: Label
     layout_properties: {grid_position: 'CMAFEC,ZYMTGZ EGVOBM,OAAQUX'}
   - name: drop_down_kpi
     properties:
       placeholder: KPI
-      items: [CAPEX, OPEX, TCO, IRR, ROI, Terugverdientijd]
+      items: [CAPEX, OPEX, TCO, IRR, ROI]
       include_placeholder: false
     type: DropDown
     layout_properties: {grid_position: ',undefined'}
@@ -155,20 +156,36 @@ components:
     properties: {height: 32}
     type: Spacer
     layout_properties: {grid_position: ',YEBKUM', full_width_row: false}
-  - name: outlined_1_label
+  - name: before_label
     properties: {text: 'Before:', visible: true}
     type: Label
     layout_properties: {grid_position: ',XQFTZC KILQSW,HQDEXL'}
-  - name: outlined_2_label
+  - name: after_label
     properties: {text: 'After:'}
     type: Label
     layout_properties: {grid_position: ',XQFTZC EKWWWJ,NGOKBO'}
-  - name: outlined_1
+  - name: capex
     properties: {}
     type: Label
     layout_properties: {grid_position: ',GBFYMY EOAWFM,CVZIXN'}
-  - name: outlined_2
+  - name: opex_old
     properties: {}
     type: Label
-    layout_properties: {grid_position: ',GBFYMY WWDGMK,JIXALF'}
+    layout_properties: {grid_position: ',GBFYMY RBRSUR,CKFCGB'}
+  - name: opex_new
+    properties: {}
+    type: Label
+    layout_properties: {grid_position: ',GBFYMY EKZOZB,YCSIJM'}
+  - name: tco
+    properties: {}
+    type: Label
+    layout_properties: {grid_position: ',GBFYMY TJKYJG,LKVZJU'}
+  - name: irr
+    properties: {}
+    type: Label
+    layout_properties: {grid_position: ',GBFYMY LANYML,CMFDEZ'}
+  - name: roi
+    properties: {}
+    type: Label
+    layout_properties: {grid_position: ',GBFYMY WNWSEU,RVJAYJ'}
 is_package: true
