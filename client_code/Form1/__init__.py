@@ -21,47 +21,39 @@ class Form1(Form1Template):
 
     #Dit is een quick fix. We laden nu al de data in voordat de gebruiker op de "gain insight" knop druk.
     #Deze functionaliteit hoor bij de submit_button_click()
-    gas_data = anvil.server.call('get_data', 'Gas')  
-    electricity_data = anvil.server.call('get_data', 'Electricity')  
-    self.configure_energy_plot(gas_data, self.plot_1, 'Gas','orange')
-    self.configure_energy_plot(electricity_data, self.plot_2, 'Electricity','blue')
-    # Roep de serverfunctie aan om de plot te genereren
-    plot_json = anvil.server.call('get_plot_data')
-    # Zet de JSON-plot om in een Plotly-figuur en toon deze
-    self.plot_3.figure, self.plot_4.figure = plot_json
+    
       
 
   def UploadData_Click(self, **event_args):
     if self.ProdDataToggle.checked and self.Consumption_FileLoader.file and self.Production_FileLoader.file:
-      # Code to execute if the checkbox is checked and both file uploaders are not empty
-      print("UPLOAD CONSUMPTION AND PRODUCTION DATA")
-      self.submit_button_click()
+        # Code to execute if the checkbox is checked and both file uploaders are not empty
+        print("UPLOAD CONSUMPTION AND PRODUCTION DATA")
+        self.submit_button_click()
     elif self.ProdDataToggle.checked and self.Consumption_FileLoader.file:
-      self.ErrorNoProductionData()
+        self.ErrorNoProductionData()
     elif self.ProdDataToggle.checked and self.Production_FileLoader.file:
-      self.ErrorNoConsumptionData()
+        self.ErrorNoConsumptionData()
     elif self.ProdDataToggle.checked:
-      self.ErrorNoConsumptionData()
-      self.ErrorNoProductionData()
+        self.ErrorNoConsumptionData()
+        self.ErrorNoProductionData()
     elif self.Consumption_FileLoader.file is not None:
-      self.submit_button_click()
+        self.submit_button_click()
+        self.UploadData()
+        print("UPLOAD CONSUMPTION DATA")
     else:
-      self.ErrorNoConsumptionData()
-
-  def TEMPUPLOAD(self, **event_args):
-    self.submit_button_click()
+        self.ErrorNoConsumptionData()
 
   def UploadData(self):
-    result = alert(content="Wilt u doorgaan naar de visualisatie?",
-               title="Data succesvol geupload!",
-               large=True,
-               buttons=[
-                 ("Ga door", "Load_Visualisatie"),
-                 ("Stop", "Doe niks")
-               ])
-    print(f"The user chose {result}")
+    # result = alert(content="Wilt u doorgaan naar de visualisatie?",
+    #            title="Data succesvol geupload!",
+    #            large=True,
+    #            buttons=[
+    #              ("Ga door", "Load_Visualisatie"),
+    #              ("Stop", "Doe niks")
+    #            ])
+    # print(f"The user chose {result}")
     #anvil.server.call('getData', self.Consumption_FileLoader.file)
-    #anvil.server.call('emit_server_ip', self.Consumption_FileLoader.file)
+    anvil.server.call('emit_server_ip', self.Consumption_FileLoader.file)
 
   def ErrorNoConsumptionData(self):
       self.ConsumptionUploadlabel.foreground = 'theme:Error'
@@ -111,10 +103,14 @@ class Form1(Form1Template):
     pass
 
   def submit_button_click(self, **event_args):    
-    # gas_data = anvil.server.call('get_data', 'Gas')  
-    # electricity_data = anvil.server.call('get_data', 'Electricity')  
-    # self.configure_energy_plot(gas_data, self.plot_1, 'Gas','orange')
-    # self.configure_energy_plot(electricity_data, self.plot_2, 'Electricity','blue')
+    #gas_data = anvil.server.call('get_data', 'Gas')  
+    #electricity_data = anvil.server.call('get_data', 'Electricity')  
+    #self.configure_energy_plot(gas_data, self.plot_1, 'Gas','orange')
+    #self.configure_energy_plot(electricity_data, self.plot_2, 'Electricity','blue')
+    # Roep de serverfunctie aan om de plot te genereren
+    #plot_json = anvil.server.call('get_plot_data')
+    # Zet de JSON-plot om in een Plotly-figuur en toon deze
+    #self.plot_3.figure, self.plot_4.figure = plot_json
     self.DataContentPanel.visible = False
     self.VisualisatiePanel.visible = True
     self.ResetButton.visible = True
