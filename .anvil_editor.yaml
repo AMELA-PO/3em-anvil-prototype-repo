@@ -1,8 +1,6 @@
 unique_ids:
   forms:
     A_Upload_data_page: ZMTS5JQW7UVJFUXDK3ONR3A3A6DFWFOZ
-    A_Upload_data_page.RowTemplate1: '1712314101872365218873067.523'
-    A_Upload_data_page.RowTemplate2: '1714646967666682616666016.4181'
     B_SES_config_page: '1715860274601877368052326.4073'
     C_Dashboard_page: '1714746257646402201665644.0803'
   modules: {}

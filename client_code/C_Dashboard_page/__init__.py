@@ -1,5 +1,4 @@
 from ._anvil_designer import C_Dashboard_pageTemplate
-from ..B_SES_config_page import B_SES_config_page
 from anvil import *
 import anvil.server
 import anvil.tables as tables
@@ -8,12 +7,12 @@ from anvil.tables import app_tables
 import plotly.graph_objects as go
 
 class C_Dashboard_page(C_Dashboard_pageTemplate):
-    def __init__(self, **properties):
+    def __init__(self, option_data=None, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         self.selected_option = None
-        self.show_popup()
-        
+        self.option_data = option_data
+        self.fill_labels()        
         self.drop_down_kpi.selected_value = self.drop_down_kpi.placeholder
 
         self.Energy_Performance_Panel.visible = True
@@ -21,25 +20,41 @@ class C_Dashboard_page(C_Dashboard_pageTemplate):
         self.Financial_Performance_Panel.visible = True
         self.Toggle_Financials.icon = "fa:caret-down"
         # Any code you write here will run before the form opens.
-    
-    def show_popup(self):
-        popup = B_SES_config_page()
-        popup.set_event_handler('x-close-popup', self.on_popup_close)
-        alert(popup, large=True, dismissible=False)
 
-    def on_popup_close(self, **event_args):
-        print('should close')
-        if self.selected_option:
-            # Proceed with the main content
-            self.label_1.text = f"Selected option: {self.selected_option}"
         #Plot the data
-        gas_data_old = anvil.server.call_s('get_data', 'Gas') 
-        print('silent loading data')
-        electricity_data_old = anvil.server.call_s('get_data', 'Electricity')  
-        gas_data_new = anvil.server.call_s('get_new_data', 'salestool_gas_consumption_new.xlsx')  
-        electricity_data_new = anvil.server.call_s('get_new_data', 'salestool_electricity_consumption_new.xlsx') 
+        gas_data_old = anvil.server.call('get_data', 'Gas') 
+        electricity_data_old = anvil.server.call('get_data', 'Electricity')  
+        gas_data_new = anvil.server.call('get_new_data', 'salestool_gas_consumption_new.xlsx')  
+        electricity_data_new = anvil.server.call('get_new_data', 'salestool_electricity_consumption_new.xlsx') 
         self.configure_energy_plot(gas_data_old, gas_data_new, self.Plot_LineChart_Gas_Old_Nieuw, 'Gas', 'orange', 'green')
         self.configure_energy_plot(electricity_data_old, electricity_data_new, self.Plot_LineChart_Electricity_Old_Nieuw, 'Electricity', 'blue', 'orange')
+        
+    def fill_labels(self):
+        labels = [
+            "total_electricity_cons",
+            "total_electricity_cons_new",
+            "electricity_savings_percentage",
+            "total_gas_cons",
+            "total_gas_cons_new",
+            "gas_savings_percentage",
+            "total_co2",
+            "total_co2_new",
+            "co2_savings_percentage",
+            "total_energy_cost",
+            "total_energy_cost_new",
+            "energy_cost_savings",
+            "energy_cost_savings_percentage",
+            "capex",
+            "opex_old",
+            "opex_new",
+            "tco",
+            "irr",
+            "roi"
+        ]
+        for label in labels:
+            value = self.option_data.get(label, "N/A")
+            label_obj = getattr(self, label)
+            label_obj.text = str(value)
 
     
     def Toggle_Preformance_click(self, **event_args):
@@ -98,34 +113,32 @@ class C_Dashboard_page(C_Dashboard_pageTemplate):
             )
         )
         plot_object.figure = fig
+
+    def values_invisible(self):
+        self.capex.visible = False
+        self.opex_old.visible = False
+        self.opex_new.visible = False
+        self.tco.visible = False
+        self.irr.visible = False
+        self.roi.visible = False
+        self.before_label.visible = False
+        self.after_label.visible = False
     
     def drop_down_kpi_change(self, **event_args):
+        self.values_invisible()
         if self.drop_down_kpi.selected_value == "CAPEX":
-            self.outlined_1.text = "€ 1.000.000"
-            self.outlined_1_label.visible = False
-            self.outlined_2_label.visible = False
-            self.outlined_2.visible = False
+            self.capex.visible = True
         if self.drop_down_kpi.selected_value == "OPEX":
-            self.outlined_1.text = "€ 550.000"
-            self.outlined_2.text = "€ 500.000"
-            self.outlined_1_label.visible = True
-            self.outlined_2_label.visible = True
-            self.outlined_2.visible = True
+            self.before_label.visible = True
+            self.after_label.visible = True
+            self.opex_old.visible = True
+            self.opex_new.visible = True
         if self.drop_down_kpi.selected_value == "TCO":
-            self.outlined_1.text = "€ 1.500.000"
-            self.outlined_1_label.visible = False
-            self.outlined_2_label.visible = False
-            self.outlined_2.visible = False
+            self.tco.visible = True
         if self.drop_down_kpi.selected_value == "IRR":
-            self.outlined_1.text = "10.72 %"
-            self.outlined_1_label.visible = False
-            self.outlined_2_label.visible = False
-            self.outlined_2.visible = False
+            self.irr.visible = True
         if self.drop_down_kpi.selected_value == "ROI":
-            self.outlined_1.text = "15 Years"
-            self.outlined_1_label.visible = False
-            self.outlined_2_label.visible = False
-            self.outlined_2.visible = False
+            self.roi.visible = True
         # if self.drop_down_kpi.selected_value == "Terugverdientijd":
         #     self.outlined_1.text = "15 Years"
         #     self.outlined_1_label.visible = False
