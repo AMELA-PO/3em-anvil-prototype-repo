@@ -21,13 +21,13 @@ class C_Dashboard_page(C_Dashboard_pageTemplate):
         self.Toggle_Financials.icon = "fa:caret-down"
         # Any code you write here will run before the form opens.
 
-        #Plot the data
-        gas_data_old = anvil.server.call('get_data', 'Gas') 
-        electricity_data_old = anvil.server.call('get_data', 'Electricity')  
-        gas_data_new = anvil.server.call('get_new_data', 'salestool_gas_consumption_new.xlsx')  
-        electricity_data_new = anvil.server.call('get_new_data', 'salestool_electricity_consumption_new.xlsx') 
-        self.configure_energy_plot(gas_data_old, gas_data_new, self.Plot_LineChart_Gas_Old_Nieuw, 'Gas', 'orange', 'green')
-        self.configure_energy_plot(electricity_data_old, electricity_data_new, self.Plot_LineChart_Electricity_Old_Nieuw, 'Electricity', 'blue', 'orange')
+        # #Plot the data
+        # gas_data_old = anvil.server.call('get_data', 'Gas') 
+        # electricity_data_old = anvil.server.call('get_data', 'Electricity')  
+        # gas_data_new = anvil.server.call('get_new_data', 'salestool_gas_consumption_new.xlsx')  
+        # electricity_data_new = anvil.server.call('get_new_data', 'salestool_electricity_consumption_new.xlsx') 
+        # self.configure_energy_plot(gas_data_old, gas_data_new, self.Plot_LineChart_Gas_Old_Nieuw, 'Gas', 'orange', 'green')
+        # self.configure_energy_plot(electricity_data_old, electricity_data_new, self.Plot_LineChart_Electricity_Old_Nieuw, 'Electricity', 'blue', 'orange')
         
     def fill_labels(self):
         labels = [
@@ -145,3 +145,7 @@ class C_Dashboard_page(C_Dashboard_pageTemplate):
         #     self.outlined_2_label.visible = False
         #     self.outlined_2.visible = False
         pass
+
+    def Resetpage(self, **event_args):
+        """This method is called when the button is clicked"""
+        open_form('A_Upload_data_page')

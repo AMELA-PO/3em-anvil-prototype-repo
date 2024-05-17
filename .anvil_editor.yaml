@@ -3,11 +3,15 @@ unique_ids:
     A_Upload_data_page: ZMTS5JQW7UVJFUXDK3ONR3A3A6DFWFOZ
     B_SES_config_page: '1715860274601877368052326.4073'
     C_Dashboard_page: '1714746257646402201665644.0803'
+    Form1: '1715957484077208006700735.69983'
   modules: {}
   server_modules:
     ServerModule1: '1714661866774207693778521.33154'
   assets:
     beautiful_dashboard.png: '171474634879312396710324.185322'
+    configure_energy_system_button.png: '171595680941728687773495.149395'
     standard-page.html: 6XYT3XPWNBSWCBOCCJPYXGW7AE6NP7UJ
     theme.css: R77327J5RM6BHY6AB32WYI5VBS3H2DXW
+    upload_data_button.png: '1715956796474704639501407.3279'
+    visualize_energy_financial_performance.png: '1715956815803496481795523.76416'
   scripts: {}

@@ -28,3 +28,14 @@ components:
   properties: {}
   name: navbar_links
   layout_properties: {slot: nav-right}
+  components:
+  - name: ResetButton_copy
+    properties: {align: right, tooltip: '', foreground: 'theme:On Primary', visible: true,
+      text: '', icon_align: top, background: 'theme:Primary', bold: false, icon: 'fa:backward'}
+    type: Button
+    event_bindings: {click: Resetpage}
+  - name: ResetButton
+    properties: {align: left, tooltip: '', foreground: 'theme:On Primary', visible: false,
+      text: '', icon_align: top, background: 'theme:Primary', bold: false, icon: 'fa:home'}
+    type: Button
+    event_bindings: {click: Resetpage}
