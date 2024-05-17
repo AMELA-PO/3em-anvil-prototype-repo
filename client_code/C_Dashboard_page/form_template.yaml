@@ -1,4 +1,6 @@
-container: {type: ColumnPanel}
+container:
+  type: ColumnPanel
+  properties: {visible: true}
 components:
 - name: navbar_links_copy
   properties: {align: right}
@@ -213,3 +215,4 @@ components:
     type: Label
     layout_properties: {grid_position: ',GBFYMY WNWSEU,RVJAYJ'}
 is_package: true
+custom_component: false

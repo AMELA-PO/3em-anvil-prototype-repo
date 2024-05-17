@@ -9,6 +9,7 @@ import plotly.graph_objects as go
 class C_Dashboard_page(C_Dashboard_pageTemplate):
     def __init__(self, option_data=None, **properties):
         # Set Form properties and Data Bindings.
+        self.html = 'standard-page.html'
         self.init_components(**properties)
         self.selected_option = None
         self.option_data = option_data

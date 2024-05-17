@@ -9,7 +9,7 @@ services:
 - source: /runtime/services/anvil/files.yml
   client_config: {}
   server_config: {file_table: files}
-startup: {type: form, module: A_Upload_data_page}
+startup: {type: form, module: B_SES_config_page}
 package_name: '[3EM]_Frontend'
 allow_embedding: false
 name: '[3EM] Frontend'
