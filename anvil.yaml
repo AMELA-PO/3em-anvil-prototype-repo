@@ -18,6 +18,7 @@ runtime_options:
   client_version: '3'
   server_version: python3-full
   server_spec: {base: python310-minimal}
+metadata: {logo_img: 'asset:AMELA_applogo_new_website_design.png'}
 startup_form: null
 db_schema:
   files:
