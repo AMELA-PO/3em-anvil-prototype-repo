@@ -11,9 +11,6 @@ class A_Upload_data_page(A_Upload_data_pageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    self.upload_data_workflow.opacity = 1.00
-    self.configure_ses_workflow.opacity = 0.2
-    self.visualize_performance_workflow.opacity = 0.2
       
     # Any code you write here will run before the form opens.
     #media = anvil.server.call('render_chart_scatter')
@@ -164,18 +161,6 @@ class A_Upload_data_page(A_Upload_data_pageTemplate):
   def GotoDashboard(self, **event_args):
       open_form('Dashboard')
       pass
-
-  def upload_data_workflow_mouse_down(self, x, y, button, keys, **event_args):
-      """This method is called when a mouse button is pressed on this component"""
-      open_form('A_Upload_data_page')
-
-  def configure_ses_workflow_mouse_down(self, x, y, button, keys, **event_args):
-      """This method is called when a mouse button is pressed on this component"""
-      open_form('B_SES_config_page')
-
-  def visualize_performance_workflow_mouse_down(self, x, y, button, keys, **event_args):
-      """This method is called when a mouse button is pressed on this component"""
-      open_form('C_Dashboard_page')
 
 
   

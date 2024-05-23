@@ -1,4 +1,4 @@
-from ._anvil_designer import C_Dashboard_pageTemplate
+from ._anvil_designer import C_Dashboard_page_newTemplate
 from anvil import *
 import anvil.server
 import anvil.tables as tables
@@ -6,10 +6,9 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import plotly.graph_objects as go
 
-class C_Dashboard_page(C_Dashboard_pageTemplate):
+class C_Dashboard_page_new(C_Dashboard_page_newTemplate):
     def __init__(self, option_data=None, **properties):
         # Set Form properties and Data Bindings.
-        self.html = 'standard-page.html'
         self.init_components(**properties)
         self.selected_option = None
         self.option_data = option_data
@@ -29,7 +28,7 @@ class C_Dashboard_page(C_Dashboard_pageTemplate):
         # electricity_data_new = anvil.server.call('get_new_data', 'salestool_electricity_consumption_new.xlsx') 
         # self.configure_energy_plot(gas_data_old, gas_data_new, self.Plot_LineChart_Gas_Old_Nieuw, 'Gas', 'orange', 'green')
         # self.configure_energy_plot(electricity_data_old, electricity_data_new, self.Plot_LineChart_Electricity_Old_Nieuw, 'Electricity', 'blue', 'orange')
-        
+
     def fill_labels(self):
         labels = [
             "total_electricity_cons",

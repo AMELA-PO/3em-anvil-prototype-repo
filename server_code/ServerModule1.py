@@ -10,6 +10,7 @@ from plotly import graph_objects as go
 from plotly import express as px
 import pandas as pd
 import altair as alt
+import json
 
 
 @anvil.server.callable
@@ -49,7 +50,12 @@ def get_new_data(file):
   # Resample the data to daily frequency
   df_daily = df.resample('D').sum()
   df_daily.reset_index(inplace=True)
-  # Return the DataFrame to the client
+  # df_daily['Timestamp'] = df_daily['Timestamp'].astype(str)
+  # # Return the DataFrame to the client
+
+  # # Save dictionary to a file using json
+  # with open('data_daily.json', 'w') as file:
+  #   json.dump(df_daily.to_dict('records'), file)
   return df_daily.to_dict('records')
 
 @anvil.server.callable

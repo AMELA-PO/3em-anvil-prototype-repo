@@ -170,12 +170,16 @@ color: %color:On Primary Container%;
 }
 
 .app-bar {
-  z-index: 1000;
-  position: fixed;
-  top: 0;
-  top: %anvil-banner-height%;
-  right: 0;
-  left: 0;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    top: %anvil-banner-height%;
+    right: 0;
+    left: 0;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 5px solid %color:Primary%;
 /*   flex: 0 0;
   flex-basis: auto;
   flex-basis: content; */

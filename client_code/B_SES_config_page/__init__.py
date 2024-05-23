@@ -4,7 +4,7 @@ import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from ..C_Dashboard_page import C_Dashboard_page
+from ..C_Dashboard_page_new import C_Dashboard_page_new
 
 class B_SES_config_page(B_SES_config_pageTemplate):
     def __init__(self, **properties):
@@ -23,7 +23,7 @@ class B_SES_config_page(B_SES_config_pageTemplate):
         if selected_option:
             print('even wachten....')
             print(self.option_data)
-            dashboard_page = C_Dashboard_page(option_data=self.option_data)
+            dashboard_page = C_Dashboard_page_new(option_data=self.option_data)
             open_form(dashboard_page)
 
     def get_option_data(self, selected_option):
