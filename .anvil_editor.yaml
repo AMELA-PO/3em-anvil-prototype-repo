@@ -1,8 +1,7 @@
 unique_ids:
   forms: {}
   modules: {}
-  server_modules:
-    ServerModule1: '1714661866774207693778521.33154'
+  server_modules: {}
   assets:
     beautiful_dashboard.png: '171474634879312396710324.185322'
     standard-page.html: 6XYT3XPWNBSWCBOCCJPYXGW7AE6NP7UJ
