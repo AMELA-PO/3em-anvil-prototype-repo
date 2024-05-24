@@ -3,7 +3,6 @@ unique_ids:
   modules: {}
   server_modules: {}
   assets:
-    beautiful_dashboard.png: '171474634879312396710324.185322'
     standard-page.html: 6XYT3XPWNBSWCBOCCJPYXGW7AE6NP7UJ
     theme.css: R77327J5RM6BHY6AB32WYI5VBS3H2DXW
   scripts: {}
